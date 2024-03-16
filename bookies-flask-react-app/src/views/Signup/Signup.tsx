@@ -3,6 +3,7 @@ import './Signup.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface INewuser {
   username: string,
@@ -15,6 +16,8 @@ const Signup = () => {
     username: '',
     password: ''
   })
+
+  const navigate = useNavigate();
 
   const createUser = async () => {
     const response = await fetch('http://127.0.0.1:5000/auth_api/signup', {
@@ -29,7 +32,8 @@ const Signup = () => {
   const handleSignup = async (event: FormEvent) => {
     event.preventDefault();
     console.log(newuser);
-    await createUser()
+    await createUser();
+    navigate('/');
   }
 
   return (

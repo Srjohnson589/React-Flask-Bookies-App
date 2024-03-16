@@ -16,13 +16,12 @@ def signup_api():
     data = request.get_json()
     queried_user = User.query.filter(User.username == data['username']).first()
     if not queried_user:
-        hashed_pswd = generate_password_hash(data['password'])
-        new_user = User(username = data['username'], password=hashed_pswd)
-
+        new_user = User(username = data['username'], password = generate_password_hash(data['password']))
         new_user.save()
         return jsonify({
             'status': 'ok',
-            'message': 'User was successfully created'
+            'message': 'User was successfully created',
+            'hash': new_user.password
         })
     else:
         return jsonify({
@@ -49,7 +48,9 @@ def login_api():
     else:
         return jsonify({
             'status': 'not ok',
-            'message': 'Username or password are incorrect'
+            'message': 'Username or password are incorrect',
+            'password': str(type(queried_user.password)),
+            'data': str(type(data['password']))
         })
     
 @auth_api.get('/logout')

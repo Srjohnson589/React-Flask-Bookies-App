@@ -23,9 +23,9 @@ export default function UserContextProvider({children}: {children: React.ReactNo
     }
 
     return(
-        <UserContextProvider value={values}>
+        <UserContext.Provider value={values}>
             {children}
-        </UserContextProvider>
+        </UserContext.Provider>
     )
 
 }

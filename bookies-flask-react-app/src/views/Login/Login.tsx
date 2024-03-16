@@ -3,7 +3,8 @@ import './Login.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, FormEvent, useContext } from 'react';
-// import { UserContext } from '../../context/UserContext';
+import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 interface ILoginuser {
   username: string,
@@ -12,12 +13,14 @@ interface ILoginuser {
 
 const Login = () => {
 
-  // const {setUser} = useContext(UserContext)
+  const {user, setUser} = useContext(UserContext)
 
   const [loginuser, setLoginuser] = useState<ILoginuser>({
     username: '',
     password: ''
   })
+
+  const navigate = useNavigate()
 
   const signinUser = async () => {
     const response = await fetch('http://127.0.0.1:5000/auth_api/login', {
@@ -27,15 +30,15 @@ const Login = () => {
     })
     const data = await response.json()
     console.log(data)
-    // if (data.status === 'ok') {
-    //   setUser({username: loginuser.username})
-    //   console.log(`${loginuser.username} is logged in`)
-    // }
+    if (data.status === 'ok') {
+      setUser({username: loginuser.username})
+      console.log(`${user.username}`)
+      navigate('/')
+    }
   }
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(loginuser);
     await signinUser();
   }
 

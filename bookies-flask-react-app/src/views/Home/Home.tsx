@@ -1,16 +1,17 @@
 import './Home.css'
-import { useState } from 'react';
-// import Login from '/src/components/home/Login/Login.tsx';
+import { useState, useContext } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import UserContextProvider, { UserContext } from '../../context/UserContext';
 
 const Home = () => {
     
-    const [user, setUser] = useState({
-        username: '',
-        password: ''
-    })
+    const {user, setUser} = useContext(UserContext);
+
+    const logout = () => {
+        setUser({username: ''})
+    }
 
     return (
         <> 
@@ -21,8 +22,9 @@ const Home = () => {
                 <Stack direction="row" spacing={2}>
                     {user.username ?
                     <>
+                    <h6>{user.username}</h6>
                     <Link to={"/"} className="text-decoration-none">
-                        <Button variant="contained">Log Out
+                        <Button onClick={logout} variant="contained">Log Out
                         </Button> 
                     </Link>
                     </>
