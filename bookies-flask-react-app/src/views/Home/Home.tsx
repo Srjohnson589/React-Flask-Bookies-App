@@ -32,9 +32,11 @@ const Home = () => {
                         <Button variant="contained">Sign Up
                         </Button>
                     </Link>
-                    <Button variant="contained" color="success">
-                        Login
-                    </Button>
+                    <Link to={"/login"} className="text-decoration-none">
+                        <Button variant="contained" color="success">
+                            Login
+                        </Button>
+                    </Link>
                     </>
                     }
                 </Stack>

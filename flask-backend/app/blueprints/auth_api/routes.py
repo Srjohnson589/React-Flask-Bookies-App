@@ -2,7 +2,6 @@ from . import auth_api
 from flask import request, jsonify
 from app.models import db, User
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_required, login_user, logout_user
 
 # Create User
 @auth_api.post('/signup')
@@ -31,7 +30,7 @@ def signup_api():
             'message': 'Username already exists'
         })
 
-@auth_api.get('/login')
+@auth_api.post('/login')
 def login_api():
     '''
     payload should include
@@ -43,10 +42,9 @@ def login_api():
     data = request.get_json()
     queried_user = User.query.filter(User.username == data['username']).first()
     if queried_user and check_password_hash(queried_user.password, data['password']):
-        login_user(queried_user)
         return jsonify({
             'status': 'ok',
-            'message': 'User was successfully logged in'
+            'message': 'Username and password are correct'
         })
     else:
         return jsonify({
@@ -55,7 +53,6 @@ def login_api():
         })
     
 @auth_api.get('/logout')
-@login_required
 def logout_api():
     '''
     payload should include
@@ -66,7 +63,6 @@ def logout_api():
     data = request.get_json()
     queried_user = User.query.filter(User.username == data['username']).first()
     if queried_user:
-        logout_user()
         return jsonify({
             'status': 'ok',
             'message': 'User was successfully logged out'
