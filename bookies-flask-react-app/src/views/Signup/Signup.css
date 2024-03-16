@@ -1,0 +1,29 @@
+.signupform {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: whitesmoke;
+    padding: 20px;
+}
+
+.signupform h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: 'Shrikhand', serif;
+    font-size: 2rem;
+}
+
+.signupform button{
+    margin-top: 30px;
+    background-color: rgb(255, 156, 42);
+}
+
+.signupform button:hover {
+    margin-top: 30px;
+    background-color: rgb(215, 138, 49);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}

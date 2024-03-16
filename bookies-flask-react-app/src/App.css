@@ -1,0 +1,57 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.shrikhand {
+  font-family: "Shrikhand", serif;
+}
+
+.maindiv{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: url(/src/assets/images/background.jpg);
+  /* background: linear-gradient(to bottom, rgb(198, 233, 252), rgb(251, 231, 152)); */
+}
+
+.myhomediv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: end;}
+
+.bookies-logo {
+  width: 35%;
+  height: 100px;
+  object-fit: cover;
+}
+
+
+.mynavbar {
+  background: linear-gradient(to bottom right, rgb(91, 176, 255), RGB(42, 117, 187));
+  padding: 2px;
+}
+
+.mynavitems {
+  color: black!important;
+  padding: 0;
+  margin: 0 8px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.myactive {
+  background-color: rgb(255, 203, 5);
+  color: rgb(60, 90, 166)!important;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.mynavitems:hover, .mynavitems:active {
+  background-color: rgb(255, 203, 5);
+  color: rgb(42, 117, 187)!important;
+  border-radius: 6px;
+}
