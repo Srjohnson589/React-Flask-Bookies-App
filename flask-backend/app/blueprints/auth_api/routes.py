@@ -1,7 +1,7 @@
 from . import auth_api
 from flask import request, jsonify
 from app.models import db, User
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 
 # Create User
 @auth_api.post('/signup')
@@ -16,12 +16,11 @@ def signup_api():
     data = request.get_json()
     queried_user = User.query.filter(User.username == data['username']).first()
     if not queried_user:
-        new_user = User(username = data['username'], password = generate_password_hash(data['password']))
+        new_user = User(username = data['username'], password = data['password'])
         new_user.save()
         return jsonify({
             'status': 'ok',
-            'message': 'User was successfully created',
-            'hash': new_user.password
+            'message': 'User was successfully created'
         })
     else:
         return jsonify({
@@ -48,9 +47,7 @@ def login_api():
     else:
         return jsonify({
             'status': 'not ok',
-            'message': 'Username or password are incorrect',
-            'password': str(type(queried_user.password)),
-            'data': str(type(data['password']))
+            'message': 'Username or password are incorrect'
         })
     
 @auth_api.get('/logout')
