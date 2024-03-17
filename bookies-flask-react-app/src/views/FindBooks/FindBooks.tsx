@@ -2,32 +2,21 @@ import { useState } from 'react';
 import './FindBooks.css'
 import Nav from '/src/components/Nav/Nav.tsx';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-
-interface IBook {
-    id : string,
-    title: string,
-    author: string,
-    smallThumbnail: string,
-    thumbnail: string
-}
-
-interface IBookList {
-    [index: number]:IBook;
-}
+import {
+    MDBCard,
+    MDBCardTitle,
+    MDBCardText,
+    MDBCardBody,
+    MDBCardImage,
+    MDBRow,
+    MDBCol,
+    MDBBtn
+} from "mdb-react-ui-kit";
 
 const FindBooks = () => {
 
     const [searchBook, setSearchBook] = useState('');
-  
-    const [book, setBook] = useState<IBook>({
-        id: '',
-        title: '',
-        author: '',
-        smallThumbnail: '',
-        thumbnail: ''
-    });
-    
-    const [returnResults, setReturnResults] = useState<IBookList>([]);
+    const [returnResults, setReturnResults] = useState([]);
 
 
   const searchResults = async (searchStr: string) => {
@@ -37,24 +26,31 @@ const FindBooks = () => {
         console.log(data)
         setReturnResults([]);
         let i = 0;
-        let books = [];
-        while (i < 9) {
+        let results = [];
+        while (results.length < 5) {
             try{
-                setBook({
+                let info_dict = {
                     id: data.items[i].id,
                     title: data.items[i].volumeInfo.title,
-                    author: data.items[i].volumeInfo.authors[0],
                     smallThumbnail: data.items[i].volumeInfo.imageLinks.smallThumbnail,
-                    thumbnail: data.items[i].volumeInfo.imageLinks.thumbnail
-                });
-                console.log(i);
-                setReturnResults(returnResults => [...returnResults, book]);
+                    thumbnail: data.items[i].volumeInfo.imageLinks.thumbnail,
+                    publisher: data.items[i].volumeInfo.publisher,
+                    published: data.items[i].volumeInfo.publishedDate.slice(0,4)
+                };
+                try {
+                    info_dict.author = data.items[i].volumeInfo.authors[0];
+                } catch {
+                    info_dict.author = '';
+                }
+                results.push(info_dict);
                 i++;
             } catch {
                 i++;
             }
         }
-        console.log(returnResults)
+        console.log(results)
+        setReturnResults(results);
+        console.log(returnResults);
     } else {
         console.log('error');
     }
@@ -72,7 +68,27 @@ const FindBooks = () => {
             onChange={(event) => {setSearchBook(event.target.value)}}></input>
             <SearchRoundedIcon onClick={() => {searchResults(searchBook)}} className="srch-icon" />
         </div>
-
+        <div className="booksearch">
+        {returnResults && returnResults.map((book, idx) => 
+        <MDBCard key={idx} style={{ maxWidth: '540px' }} className="booksearch-results" alignment='center'>
+        <MDBRow className='g-0'>
+            <MDBCol md='4'>
+                <MDBCardImage src={book.thumbnail} alt='...' fluid />
+            </MDBCol>
+            <MDBCol md='6'>
+                <MDBCardBody className="text-start">
+                    <MDBCardTitle>{book.title}</MDBCardTitle>
+                    <MDBCardText>by {book.author}</MDBCardText>
+                    <MDBCardText><small>{book.publisher} {book.published}</small></MDBCardText>
+                </MDBCardBody>
+            </MDBCol>
+            <MDBCol md='2'>
+                <MDBBtn>Save</MDBBtn>
+            </MDBCol>
+        </MDBRow>
+        </MDBCard>
+        ) }
+        </div>
     </>
   )
 }

@@ -22,3 +22,13 @@
     background-color: rgba(255, 135, 135, 0.3);
     color: rgb(32, 32, 199);
 }
+
+.booksearch {
+    padding: 60px 0;
+}
+
+.booksearch-results {
+    margin: 10px auto;
+    padding: 10px;
+    height: 200px;
+}
