@@ -1,0 +1,15 @@
+.shelf {
+    height: 30vh;
+    background-color: beige;
+    width: 70%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+h1 {
+    background-color: lightblue;
+    width: 30%;
+    margin: 0 auto;
+    font-family: 'Shrikhand';
+    border-radius: 10px;
+}

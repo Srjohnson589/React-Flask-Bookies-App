@@ -35,15 +35,17 @@ class Book(db.Model):
     book_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     author = db.Column(db.String, nullable=False)
-    img_small = db.Column(db.String, nullable=True)
-    img_large = db.Column(db.String, nullable=True)
+    thumbnail = db.Column(db.String, nullable=True)
+    publisher = db.Column(db.String, nullable=True)
+    published = db.Column(db.String, nullable=True)
     reviews = db.relationship('Review', backref='book_reviewed')
 
-    def __init__(self, title, author, img_small, img_large):
+    def __init__(self, title, author, thumbnail, publisher, published):
         self.title = title
         self.author = author
-        self.img_small = img_small
-        self.img_large = img_large
+        self.thumbnail = thumbnail
+        self.publisher = publisher
+        self.published = published
 
     def save(self):
         db.session.add(self)

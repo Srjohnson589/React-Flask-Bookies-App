@@ -50,23 +50,23 @@ def login_api():
             'message': 'Username or password are incorrect'
         })
     
-@auth_api.get('/logout')
-def logout_api():
-    '''
-    payload should include
-    {
-    "username": "string",
-    }
-    '''
-    data = request.get_json()
-    queried_user = User.query.filter(User.username == data['username']).first()
-    if queried_user:
-        return jsonify({
-            'status': 'ok',
-            'message': 'User was successfully logged out'
-        })
-    else:
-        return jsonify({
-            'status': 'not ok',
-            'message': 'User does not exist'
-        })
+# @auth_api.get('/logout')
+# def logout_api():
+#     '''
+#     payload should include
+#     {
+#     "username": "string",
+#     }
+#     '''
+#     data = request.get_json()
+#     queried_user = User.query.filter(User.username == data['username']).first()
+#     if queried_user:
+#         return jsonify({
+#             'status': 'ok',
+#             'message': 'User was successfully logged out'
+#         })
+#     else:
+#         return jsonify({
+#             'status': 'not ok',
+#             'message': 'User does not exist'
+#         })

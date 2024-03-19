@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './FindBooks.css'
 import Nav from '/src/components/Nav/Nav.tsx';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import {
     MDBCard,
@@ -17,6 +19,7 @@ const FindBooks = () => {
 
     const [searchBook, setSearchBook] = useState('');
     const [returnResults, setReturnResults] = useState([]);
+    const {user} = useContext(UserContext);
 
 
   const searchResults = async (searchStr: string) => {
@@ -30,9 +33,8 @@ const FindBooks = () => {
         while (results.length < 5) {
             try{
                 let info_dict = {
-                    id: data.items[i].id,
+                    username: user.username,
                     title: data.items[i].volumeInfo.title,
-                    smallThumbnail: data.items[i].volumeInfo.imageLinks.smallThumbnail,
                     thumbnail: data.items[i].volumeInfo.imageLinks.thumbnail,
                     publisher: data.items[i].volumeInfo.publisher,
                     published: data.items[i].volumeInfo.publishedDate.slice(0,4)
@@ -50,11 +52,20 @@ const FindBooks = () => {
         }
         console.log(results)
         setReturnResults(results);
-        console.log(returnResults);
     } else {
         console.log('error');
     }
   };
+
+  const addToRead = async (index: number) => {
+    const response = await fetch('http://127.0.0.1:5000/books_api/add_to_read', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(returnResults[index])
+    })
+    const data = await response.json()
+    alert('Book was saved to "to read" shelf')
+  }
 
   return (
     <>
@@ -83,7 +94,9 @@ const FindBooks = () => {
                 </MDBCardBody>
             </MDBCol>
             <MDBCol md='2'>
-                <MDBBtn>Save</MDBBtn>
+                <Link to={"/MyBooks"} className="text-decoration-none">
+                    <MDBBtn onClick={() => {addToRead(idx)}}>Add to read</MDBBtn>
+                </Link>
             </MDBCol>
         </MDBRow>
         </MDBCard>
