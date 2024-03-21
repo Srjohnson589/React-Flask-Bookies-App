@@ -10,7 +10,8 @@ const Nav = () => {
     const {user, setUser} = useContext(UserContext);
 
     const logout = () => {
-        setUser({username: ''})
+        setUser({username: ''});
+        localStorage.clear();
     }
 
     return (
@@ -22,11 +23,16 @@ const Nav = () => {
                 <Stack direction="row" spacing={2}>
                     {user.username ?
                     <>
-                    <h6 id="currentuser">{user.username}</h6>
-                    <Link to={"/"} className="text-decoration-none">
-                        <Button onClick={logout} variant="contained">Log Out
-                        </Button> 
+                    <Link to={"/"} className="logout-btn text-decoration-none">
+                        <h6 id="logout-btn" onClick={logout} variant="contained">Log Out</h6> 
                     </Link>
+                    <Link to={"/FindBooks"} className="text-decoration-none">
+                        <Button id="findbooks-btn" variant="contained">Search</Button>
+                    </Link>
+                    <Link to={"/MyBooks"} className="text-decoration-none">
+                        <Button id="mybooks-btn" variant="contained">My Books</Button>
+                    </Link>
+                    <h6 id="currentuser">{user.username}</h6>
                     </>
                     :
                     <>

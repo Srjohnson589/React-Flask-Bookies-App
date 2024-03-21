@@ -1,22 +1,25 @@
-import Nav from '/src/components/Nav/Nav.tsx'
-import { useState, useContext } from 'react';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import Nav from '/src/components/Nav/Nav.tsx';
+import Roulette from '/src/components/home/Roulette/Roulette.tsx'
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../context/UserContext';
 
 const Home = () => {
     
     const {user, setUser} = useContext(UserContext);
 
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('user');
+        if (loggedInUser) {
+          console.log(loggedInUser);
+          setUser({'username': loggedInUser})
+        }
+      }, []);
+
     return (
         <> 
-        <Nav/>
-        <div>
-        {user.username &&
-            <Link to={"/FindBooks"} className="text-decoration-none">
-            <Button id="findbooks-btn" variant="contained">Find Books
-            </Button>
-        </Link>}
+        <div className="transparency-container">
+          <Nav/>
+          <Roulette />
         </div>
         </>
     )

@@ -1,15 +1,66 @@
-.shelf {
-    height: 30vh;
-    background-color: beige;
-    width: 70%;
+.shelf-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
     margin: 0 auto;
-    border-radius: 10px;
+    background-color: rgba(249, 237, 237, 0.758);
+    height: 400vh;
+    width: 100%;
 }
 
-h1 {
+.shelf-h {
     background-color: lightblue;
-    width: 30%;
+    width: 90%;
     margin: 0 auto;
-    font-family: 'Shrikhand';
+    font-family: 'Shrikhand', serif;
     border-radius: 10px;
+    padding: 5px;
+    font-size: 3rem;
+}
+
+h3 {
+    padding-top: 20px;
+}
+
+.shelf {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(249, 249, 244);
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.shelf img {
+    margin: 10px;
+    height: 150px;
+}
+
+.bookcard {
+    border: 1px dotted rgb(143, 180, 204);
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.bookcard p {
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.list-icons {
+    padding: 2px;
+}
+
+.list-icons:hover {
+    cursor: pointer;
+}
+
+.title {
+    font-weight: 700;
 }

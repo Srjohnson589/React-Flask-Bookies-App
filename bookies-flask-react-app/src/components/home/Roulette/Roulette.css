@@ -1,0 +1,13 @@
+.roulette-container {
+    height: 30vh;
+    width: 60vw;
+    margin-top: 40px;
+    background-color: antiquewhite;
+    border-radius: 20px;
+}
+
+.roulette-container h2 {
+    font-family: 'Shrikhand', serif;
+    margin: 15px 0;
+
+}

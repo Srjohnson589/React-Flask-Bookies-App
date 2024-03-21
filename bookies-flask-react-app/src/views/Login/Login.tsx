@@ -31,9 +31,10 @@ const Login = () => {
     const data = await response.json()
     console.log(data)
     if (data.status === 'ok') {
-      setUser({username: loginuser.username})
-      console.log(`${user.username}`)
-      navigate('/')
+      setUser({username: loginuser.username});
+      localStorage.setItem('user', loginuser.username);
+      console.log(localStorage.getItem('user'));
+      navigate('/');
     }
   }
 

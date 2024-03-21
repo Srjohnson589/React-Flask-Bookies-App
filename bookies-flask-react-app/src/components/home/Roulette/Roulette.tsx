@@ -1,8 +1,7 @@
 // npm install react-multi-carousel --save
-
-import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { useState, useEffect } from 'react';
 
 import './Roulette.css';
 
@@ -24,17 +23,44 @@ const responsive = {
       items: 1,
     },
   };
+
   
-  const Roulette = () => (
+  const Roulette = () => {
+    
+    const [topFive, setTopFive]:string[] = useState([]);
+
+    // useEffect(() => {getBestsellers()}, []);
+
+    const getBestsellers = async () => {
+      const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${import.meta.env.VITE_NYT_KEY}`);
+      if (response.ok) {
+          const data = await response.json();
+          let i = 0;
+          let results:string[] = [];
+          while (results.length < 5) {
+              try{
+                  results.push(data.results.books[i].book_image);
+                  i++;
+              } catch {
+                  i++;
+              }
+          }
+          setTopFive(results);
+          console.log(topFive);
+      } else {
+          console.log('error');
+      }
+    };
+    
+    return (
     <div className="roulette-container">
-        <h2>Trending Now</h2>
+        <h2>This week's NYT Bestsellers</h2>
         <Carousel responsive={responsive}>
-        <div>Item 1</div>
-        <div>Item 2</div>
-        <div>Item 3</div>
-        <div>Item 4</div>
+        {topFive && topFive.map((book, idx) => {
+          <div className="carousel-img"><img src={book} alt="{idx}" /></div>
+  })}
         </Carousel>
     </div>
   );
-  
+    }
   export default Roulette;

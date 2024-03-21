@@ -66,7 +66,7 @@ def show_to_read():
         })
     
     # Show To Read shelf
-@books_api.delete('/remove_to_read')
+@books_api.post('/remove_to_read')
 def remove_to_read():
     '''
     payload should include

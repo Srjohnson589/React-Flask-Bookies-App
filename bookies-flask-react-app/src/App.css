@@ -11,47 +11,33 @@
 .maindiv{
   margin: 0;
   padding: 0;
-  width: 100%;
-  min-height: 100vh;
-  background: url(/src/assets/images/background.jpg);
+  width: 100vw;
+  height: 100vh;
+  background: url(/src/assets/images/background3.jpg);
+  background-size: cover;
   /* background: linear-gradient(to bottom, rgb(198, 233, 252), rgb(251, 231, 152)); */
 }
 
-.myhomediv {
+.transparency-container {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: end;}
-
-.bookies-logo {
-  width: 35%;
-  height: 100px;
-  object-fit: cover;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  margin: 0 auto;
+  background-color: rgba(249, 237, 237, 0.43);
+  height: 95vh;
+  width: 90vw;
 }
 
+@media only screen and (max-width: 800px) {
 
-.mynavbar {
-  background: linear-gradient(to bottom right, rgb(91, 176, 255), RGB(42, 117, 187));
-  padding: 2px;
-}
+  .maindiv {
+    height: 400vh;
+    background-size: contain;
+  }
 
-.mynavitems {
-  color: black!important;
-  padding: 0;
-  margin: 0 8px;
-  font-size: 20px;
-  text-align: center;
-}
+  .transparency-container {
+    height: 390vh;
+  }
 
-.myactive {
-  background-color: rgb(255, 203, 5);
-  color: rgb(60, 90, 166)!important;
-  font-weight: bold;
-  border-radius: 6px;
-}
-
-.mynavitems:hover, .mynavitems:active {
-  background-color: rgb(255, 203, 5);
-  color: rgb(42, 117, 187)!important;
-  border-radius: 6px;
 }

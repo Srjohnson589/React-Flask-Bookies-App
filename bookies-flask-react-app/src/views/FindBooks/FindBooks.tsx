@@ -1,9 +1,16 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import './FindBooks.css'
 import Nav from '/src/components/Nav/Nav.tsx';
-import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import CheckIcon from '@mui/icons-material/Check';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { teal } from '@mui/material/colors';
+
+
+
 import {
     MDBCard,
     MDBCardTitle,
@@ -19,8 +26,15 @@ const FindBooks = () => {
 
     const [searchBook, setSearchBook] = useState('');
     const [returnResults, setReturnResults] = useState([]);
-    const {user} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
 
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('user');
+        if (loggedInUser) {
+          console.log(loggedInUser);
+          setUser({'username': loggedInUser})
+        }
+      }, []);
 
   const searchResults = async (searchStr: string) => {
     const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}`);
@@ -30,19 +44,23 @@ const FindBooks = () => {
         setReturnResults([]);
         let i = 0;
         let results = [];
-        while (results.length < 5) {
+        while (data.items[i]) {
             try{
                 let info_dict = {
                     username: user.username,
                     title: data.items[i].volumeInfo.title,
                     thumbnail: data.items[i].volumeInfo.imageLinks.thumbnail,
-                    publisher: data.items[i].volumeInfo.publisher,
                     published: data.items[i].volumeInfo.publishedDate.slice(0,4)
                 };
                 try {
                     info_dict.author = data.items[i].volumeInfo.authors[0];
                 } catch {
                     info_dict.author = '';
+                }
+                try {
+                    info_dict.publisher = data.items[i].volumeInfo.publisher;
+                } catch {
+                    info_dict.publisher = '';
                 }
                 results.push(info_dict);
                 i++;
@@ -69,6 +87,7 @@ const FindBooks = () => {
 
   return (
     <>
+        <div className="transparency-container">
         <Nav/>
         <div className="book-searchbar">
             <input 
@@ -76,15 +95,16 @@ const FindBooks = () => {
             id="findbook-input"
             className="form-control form-rounded" 
             placeholder="Title or Author"
+            onKeyDown={(e) => {if(e.key === 'Enter'){searchResults(searchBook)}}}
             onChange={(event) => {setSearchBook(event.target.value)}}></input>
             <SearchRoundedIcon onClick={() => {searchResults(searchBook)}} className="srch-icon" />
         </div>
         <div className="booksearch">
         {returnResults && returnResults.map((book, idx) => 
-        <MDBCard key={idx} style={{ maxWidth: '540px' }} className="booksearch-results" alignment='center'>
+        <MDBCard key={idx} style={{ maxWidth: '650px' }} id="booksearch-results" alignment='center'>
         <MDBRow className='g-0'>
             <MDBCol md='4'>
-                <MDBCardImage src={book.thumbnail} alt='...' fluid />
+                <MDBCardImage className="book-img" src={book.thumbnail} alt='...' fluid />
             </MDBCol>
             <MDBCol md='6'>
                 <MDBCardBody className="text-start">
@@ -94,13 +114,14 @@ const FindBooks = () => {
                 </MDBCardBody>
             </MDBCol>
             <MDBCol md='2'>
-                <Link to={"/MyBooks"} className="text-decoration-none">
-                    <MDBBtn onClick={() => {addToRead(idx)}}>Add to read</MDBBtn>
-                </Link>
+                <div id="add-btn" onClick={() => {addToRead(idx)}}><BookmarkBorderIcon className="btn-icon"/>To read</div>
+                <div id="read-btn"><CheckIcon className="btn-icon"/>Read</div>
+                <div id="current-btn"><StarBorderIcon className="btn-icon"/>Current</div>
             </MDBCol>
         </MDBRow>
         </MDBCard>
         ) }
+        </div>
         </div>
     </>
   )

@@ -40,7 +40,7 @@ class Book(db.Model):
     published = db.Column(db.String, nullable=True)
     reviews = db.relationship('Review', backref='book_reviewed')
 
-    def __init__(self, title, author, thumbnail, publisher, published):
+    def __init__(self, title, author, thumbnail='', publisher='', published=''):
         self.title = title
         self.author = author
         self.thumbnail = thumbnail
