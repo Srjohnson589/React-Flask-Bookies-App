@@ -5,14 +5,14 @@
     margin-right: 40px;
 }
 
-#currentuser {
-    align-self: center;
-}
-
 #findbooks-btn {
     background: green;
 }
 
 #mybooks-btn {
     background: yellow;
+}
+
+#signup-heading {
+    margin: 30px 0;
 }

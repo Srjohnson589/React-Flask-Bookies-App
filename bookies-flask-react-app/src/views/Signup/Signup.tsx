@@ -1,9 +1,9 @@
-
+import Nav from '/src/components/Nav/Nav.tsx'
 import './Signup.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 interface INewuser {
   username: string,
@@ -37,10 +37,12 @@ const Signup = () => {
   }
 
   return (
+    <>
+    <Nav/>
     <Form className="signupform" onSubmit={handleSignup}>
       <h2>Sign Up</h2>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Username</Form.Label>
+        <Form.Label className="login-label">Username</Form.Label>
         <Form.Control 
           type="text" 
           placeholder="Enter username" 
@@ -48,7 +50,7 @@ const Signup = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+        <Form.Label className="login-label">Password</Form.Label>
         <Form.Control 
         type="password" 
         placeholder="Password"
@@ -57,7 +59,9 @@ const Signup = () => {
       <Button variant="primary" type="submit">
         Sign Up
       </Button>
+      <Link to={"/"} className="text-decoration-none back-btn"><h6 className="back">Back</h6></Link>
     </Form>
+    </>
   );
 }
 

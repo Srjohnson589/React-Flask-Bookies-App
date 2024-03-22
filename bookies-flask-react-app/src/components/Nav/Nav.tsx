@@ -18,32 +18,29 @@ const Nav = () => {
         <> 
         
         <div className="myhomediv">
-            <img className="bookies-logo" src="/src/assets/images/Bookieslogo.png" alt="" />
+            <img className="bookies-logo" src="/src/assets/images/Bookieslogo3.png" alt="" />
             <div className="signupbuttons">
                 <Stack direction="row" spacing={2}>
                     {user.username ?
                     <>
                     <Link to={"/"} className="logout-btn text-decoration-none">
-                        <h6 id="logout-btn" onClick={logout} variant="contained">Log Out</h6> 
+                        <h6 id="logout-btn" onClick={logout}>Log Out</h6> 
                     </Link>
                     <Link to={"/FindBooks"} className="text-decoration-none">
-                        <Button id="findbooks-btn" variant="contained">Search</Button>
+                        <h6 id="findbooks-btn">Search</h6>
                     </Link>
                     <Link to={"/MyBooks"} className="text-decoration-none">
-                        <Button id="mybooks-btn" variant="contained">My Books</Button>
+                        <h6 id="mybooks-btn">My Books</h6>
                     </Link>
-                    <h6 id="currentuser">{user.username}</h6>
+                        <h6 id="currentuser">{user.username}</h6>
                     </>
                     :
                     <>
                     <Link to={"/signup"} className="text-decoration-none">
-                        <Button variant="contained">Sign Up
-                        </Button>
+                        <h6 className="navlink">Sign Up</h6>
                     </Link>
                     <Link to={"/login"} className="text-decoration-none">
-                        <Button variant="contained" color="success">
-                            Login
-                        </Button>
+                        <h6 className="navlink">Login</h6>
                     </Link>
                     </>
                     }

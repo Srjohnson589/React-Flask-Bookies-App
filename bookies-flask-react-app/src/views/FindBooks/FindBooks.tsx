@@ -7,20 +7,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CheckIcon from '@mui/icons-material/Check';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import { teal } from '@mui/material/colors';
-
-
-
-import {
-    MDBCard,
-    MDBCardTitle,
-    MDBCardText,
-    MDBCardBody,
-    MDBCardImage,
-    MDBRow,
-    MDBCol,
-    MDBBtn
-} from "mdb-react-ui-kit";
+import {MDBCard,MDBCardTitle,MDBCardText,MDBCardBody,MDBCardImage,MDBRow,MDBCol} from "mdb-react-ui-kit";
 
 const FindBooks = () => {
 
@@ -82,12 +69,34 @@ const FindBooks = () => {
       body: JSON.stringify(returnResults[index])
     })
     const data = await response.json()
+    console.log(data)
     alert('Book was saved to "to read" shelf')
+  }
+
+  const addCurrent = async (index: number) => {
+    const response = await fetch('http://127.0.0.1:5000/books_api/add_current', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(returnResults[index])
+    })
+    const data = await response.json()
+    console.log(data)
+    alert('Book was saved to "current" shelf')
+  }
+
+  const addRead = async (index: number) => {
+    const response = await fetch('http://127.0.0.1:5000/books_api/add_read', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(returnResults[index])
+    })
+    const data = await response.json()
+    console.log(data)
+    alert('Book was saved to "read" shelf')
   }
 
   return (
     <>
-        <div className="transparency-container">
         <Nav/>
         <div className="book-searchbar">
             <input 
@@ -115,13 +124,12 @@ const FindBooks = () => {
             </MDBCol>
             <MDBCol md='2'>
                 <div id="add-btn" onClick={() => {addToRead(idx)}}><BookmarkBorderIcon className="btn-icon"/>To read</div>
-                <div id="read-btn"><CheckIcon className="btn-icon"/>Read</div>
-                <div id="current-btn"><StarBorderIcon className="btn-icon"/>Current</div>
+                <div id="read-btn" onClick={() => {addRead(idx)}}><CheckIcon className="btn-icon"/>Read</div>
+                <div id="current-btn" onClick={() => {addCurrent(idx)}}><StarBorderIcon className="btn-icon"/>Current</div>
             </MDBCol>
         </MDBRow>
         </MDBCard>
         ) }
-        </div>
         </div>
     </>
   )

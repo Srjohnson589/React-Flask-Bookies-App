@@ -10,6 +10,18 @@ user_to_read = db.Table(
     db.Column('book_id', db.Integer, db.ForeignKey('book.book_id'))
 )
 
+user_current = db.Table(
+    'user_current',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.user_id')),
+    db.Column('book_id', db.Integer, db.ForeignKey('book.book_id'))
+)
+
+user_read = db.Table(
+    'user_read',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.user_id')),
+    db.Column('book_id', db.Integer, db.ForeignKey('book.book_id'))
+)
+
 class User(db.Model, UserMixin):
     user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
@@ -17,6 +29,14 @@ class User(db.Model, UserMixin):
     to_read_shelf = db.relationship('Book',
                              secondary=user_to_read,
                              backref="wants_to_read_by",
+                             lazy="dynamic")
+    current_shelf = db.relationship('Book',
+                             secondary=user_current,
+                             backref="currently_read_by",
+                             lazy="dynamic")
+    read_shelf = db.relationship('Book',
+                             secondary=user_read,
+                             backref="already_read_by",
                              lazy="dynamic")
     my_reviews = db.relationship('Review', backref='author')
 

@@ -4,29 +4,13 @@
   text-align: center;
 }
 
-.shrikhand {
-  font-family: "Shrikhand", serif;
-}
-
 .maindiv{
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;
-  background: url(/src/assets/images/background3.jpg);
-  background-size: cover;
-  /* background: linear-gradient(to bottom, rgb(198, 233, 252), rgb(251, 231, 152)); */
-}
-
-.transparency-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  align-items: center;
-  margin: 0 auto;
-  background-color: rgba(249, 237, 237, 0.43);
-  height: 95vh;
-  width: 90vw;
+  height: cover;
+  min-height: 100vh;
+  background-color: rgb(254, 254, 232);
 }
 
 @media only screen and (max-width: 800px) {

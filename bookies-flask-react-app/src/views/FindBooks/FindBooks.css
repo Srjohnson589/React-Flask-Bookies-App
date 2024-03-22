@@ -4,8 +4,9 @@
     align-items: center;
     margin-top: 5%;
     justify-content: center;
-    width: 90%;
-    font-family: 'Quicksand', sans-serif;
+    width: 65%;
+    margin: 80px auto;
+    margin-bottom: 10px;
 }
 
 #findbook-input {
@@ -14,12 +15,13 @@
     font-weight: 800;
     box-shadow: 0 0 0 0.25rem transparent;
     transition: border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    margin: 0 auto;
 }
 
 #findbook-input:focus-visible, #findbook-input:focus {
     outline: none;
-    border: 2px solid rgba(255, 210, 210, 0.7);
-    box-shadow: 0 0 0 0.25rem rgba(253, 13, 13, 0.25);
+    border: 1px solid rgba(103, 77, 43, 0.7);
+    box-shadow: 0 0 0 0.05em rgba(205, 135, 50, 0.25);
 }
 
 .srch-icon {
@@ -29,7 +31,7 @@
 }
 
 .srch-icon:hover {
-    background-color: rgb(253, 253, 163);
+    background-color: rgba(247, 220, 161, 0.681);
     border-radius: 50px;
     font-size: 1.85rem;
 }
@@ -39,9 +41,12 @@
 }
 
 #booksearch-results {
-    background-color: rgba(255, 243, 211, 0.927);
+    background-color: #fff3dcf7;
+    border: 1px solid #574003ec;
     padding: 10px;
-    height: 250px;
+    height: 230px;
+    margin: 0 auto;
+    margin-bottom: 15px;
 }
 
 .book-img {
@@ -51,21 +56,21 @@
 #add-btn, #read-btn, #current-btn {
     text-wrap: nowrap;
     font-family: 'Quicksand', sans-serif;
-    background-color: lightblue;
+    background-color: rgb(255, 210, 151);
     border: none;
     color: black;
     margin: 10px 0;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     border-radius: 5px;
     padding: 6px 5px;
+    font-size: 0.9rem;
 }
 
 #read-btn {
-    background-color: rgb(90, 213, 149);
+    background-color: rgba(121, 89, 8, 0.379);
 }
 
 #current-btn {
-    background-color: rgb(252, 202, 141);
+    background-color: rgba(170, 105, 26, 0.513);
 }
 
 .btn-icon {

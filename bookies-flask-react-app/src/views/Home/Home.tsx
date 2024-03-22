@@ -17,10 +17,12 @@ const Home = () => {
 
     return (
         <> 
-        <div className="transparency-container">
           <Nav/>
           <Roulette />
-        </div>
+          {user.username === '' &&
+          <h2 id="signup-heading">Sign up to find friends and start your book list!</h2>}
+          {user.username && 
+          <h2 >Welcome back, {user.username}!</h2>}
         </>
     )
     }

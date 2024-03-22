@@ -3,72 +3,40 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    align-items: center;}
+    align-items: center;
+}
   
 
 .bookies-logo {
-    width: 35%;
-    min-width: 350px;
-    height: 150px;
-    object-fit: cover;
+    height: 100px;
+    margin: 20px 0 -20px 20px;
 }
 
 .signupbuttons {
     padding: 20px;
-    background-color: rgb(104, 201, 246);
-    border-radius: 20px;
-    margin-right: 40px;
+    margin-right: 20px;
 }
 
 #currentuser {
-    align-self: center;
-    font-family: 'Shrikhand', serif;
-    font-size: 1.4rem;
-    text-shadow: 1px 1px 2px rgb(255, 241, 227);
+    font-family: 'Quicksand', serif;
     text-wrap: nowrap;
+    background-color: rgb(255, 222, 173);
+    border-radius: 5px;
+    padding: 5px 8px
 }
 
-#findbooks-btn {
-    background: green;
-    font-family: 'Quicksand', sans-serif;
-    text-wrap: nowrap;
+.navlink {
+    padding: 0 5px;
 }
 
-#mybooks-btn {
-    font-family: 'Quicksand', sans-serif;
-    text-wrap: nowrap;
-}
-
-.logout-btn {
-    align-self: center;
-}
-
-#logout-btn {
+#logout-btn, #mybooks-btn, #findbooks-btn, .navlink {
+    padding: 5px 0;
     font-family: 'Quicksand', sans-serif;
     color: rgb(46, 35, 29);
     margin: 0;
     text-wrap: nowrap;
 }
 
-#logout-btn:hover {
+#logout-btn:hover, #mybooks-btn:hover, #findbooks-btn:hover, .navlink:hover {
     color: rgb(149, 86, 49);
-}
-
-@media only screen and (max-width: 800px) {
-
-    .myhomediv {
-        margin: 30px 0;
-        flex-direction: column-reverse;
-    }
-
-    .bookies-logo {
-        margin: -30px;
-        width: 70%;
-    }
-
-    .signupbuttons {
-        margin: 0;
-        flex-wrap: none;
-    }
-
 }

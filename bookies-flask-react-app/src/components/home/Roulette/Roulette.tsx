@@ -27,7 +27,7 @@ const responsive = {
   
   const Roulette = () => {
     
-    const [topFive, setTopFive]:string[] = useState([]);
+    const [topFive, setTopFive] = useState(['https://storage.googleapis.com/du-prd/books/images/9781250178633.jpg', 'https://storage.googleapis.com/du-prd/books/images/9781649374042.jpg', 'https://storage.googleapis.com/du-prd/books/images/9781649374172.jpg', 'https://storage.googleapis.com/du-prd/books/images/9781250337320.jpg', 'https://storage.googleapis.com/du-prd/books/images/9780593599839.jpg']);
 
     // useEffect(() => {getBestsellers()}, []);
 
@@ -35,6 +35,7 @@ const responsive = {
       const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${import.meta.env.VITE_NYT_KEY}`);
       if (response.ok) {
           const data = await response.json();
+          console.log(data)
           let i = 0;
           let results:string[] = [];
           while (results.length < 5) {
@@ -54,11 +55,13 @@ const responsive = {
     
     return (
     <div className="roulette-container">
-        <h2>This week's NYT Bestsellers</h2>
+        <h2>Today's NYT Bestsellers</h2>
         <Carousel responsive={responsive}>
-        {topFive && topFive.map((book, idx) => {
-          <div className="carousel-img"><img src={book} alt="{idx}" /></div>
-  })}
+          <div className="carousel-img"><img className="cover-img" src={topFive[0]} alt="current bestseller cover" /><p>#1</p></div>
+          <div className="carousel-img"><img className="cover-img" src={topFive[1]} alt="current bestseller cover" /><p>#2</p></div>
+          <div className="carousel-img"><img className="cover-img" src={topFive[2]} alt="current bestseller cover" /><p>#3</p></div>
+          <div className="carousel-img"><img className="cover-img" src={topFive[3]} alt="current bestseller cover" /><p>#4</p></div>
+          <div className="carousel-img"><img className="cover-img" src={topFive[4]} alt="current bestseller cover" /><p>#5</p></div>
         </Carousel>
     </div>
   );

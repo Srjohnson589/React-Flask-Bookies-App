@@ -1,13 +1,18 @@
 .roulette-container {
-    height: 30vh;
-    width: 60vw;
+    width: 80vw;
+    margin: 0 auto;
     margin-top: 40px;
-    background-color: antiquewhite;
-    border-radius: 20px;
 }
 
 .roulette-container h2 {
-    font-family: 'Shrikhand', serif;
     margin: 15px 0;
+}
 
+.cover-img {
+    height: 300px;
+    transition: height 0.6s ease-in-out;
+}
+
+.cover-img:hover {
+    height: 400px;
 }

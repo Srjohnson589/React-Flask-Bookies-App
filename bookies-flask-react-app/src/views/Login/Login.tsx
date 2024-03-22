@@ -1,10 +1,10 @@
-
+import Nav from '/src/components/Nav/Nav.tsx'
 import './Login.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, FormEvent, useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 interface ILoginuser {
   username: string,
@@ -44,10 +44,12 @@ const Login = () => {
   }
 
   return (
+    <>
+    <Nav/>
     <Form className="loginform" onSubmit={handleLogin}>
       <h2>Login</h2>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Username</Form.Label>
+        <Form.Label className="login-label">Username</Form.Label>
         <Form.Control 
           type="text" 
           placeholder="Enter username" 
@@ -55,7 +57,7 @@ const Login = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+        <Form.Label className="login-label">Password</Form.Label>
         <Form.Control 
         type="password" 
         placeholder="Password"
@@ -64,7 +66,9 @@ const Login = () => {
       <Button variant="primary" type="submit">
         Login
       </Button>
+      <Link to={"/"} className="text-decoration-none back-btn"><h6 className="back">Back</h6></Link>
     </Form>
+    </>
   );
 }
 
