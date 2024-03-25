@@ -60,6 +60,7 @@ def get_users(username):
         for user in users:
             thisuser = {
                 'username': user.username,
+                'profile_pic': user.profile_pic
             }
             if user in queried_user.following:
                 following.append(thisuser)
@@ -127,4 +128,53 @@ def unfollow():
         return jsonify({
             'status': 'not ok',
             'message': 'One of the users does not exist'
+        })
+    
+@auth_api.post('/save_picture')
+def save_picture():
+    '''
+    payload should include
+    {
+    "username": "string",
+    "profile_pic": "string"
+    }
+    '''
+    data = request.get_json()
+    print(data)
+    queried_user = User.query.filter(User.username == data['username']).first()
+    if queried_user:
+        queried_user.profile_pic = data['profile_pic']
+        db.session.commit()
+        return jsonify({
+            'status': 'ok',
+            'message': 'Picture updated'
+        })
+    else:
+        return jsonify({
+            'status': 'not ok',
+            'message': 'User does not exist'
+        })
+    
+@auth_api.get('/friends_current/<username>')
+def friends_current(username):
+    queried_user = User.query.filter(User.username == username).first()
+    if queried_user:
+        friends_current = []
+        for user in queried_user.following:
+            for item in user.current_shelf:
+                newitem = {
+                    'thumbnail': item.thumbnail,
+                    'username': user.username
+                }
+                friends_current.append(newitem)
+        print(friends_current)
+        return jsonify({
+            'status': 'ok',
+            'message': 'Found users',
+            'friends_current': friends_current
+        })
+    else:
+        return jsonify({
+            'status': 'not ok',
+            'message': 'User does not exist'
         })

@@ -33,3 +33,8 @@
     color: white;
     cursor: pointer;
 }
+
+.following:hover {
+    cursor: pointer;
+    border: 4px solid rgb(167, 225, 130);
+}

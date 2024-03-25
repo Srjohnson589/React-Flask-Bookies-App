@@ -35,6 +35,8 @@ const Login = () => {
       localStorage.setItem('user', loginuser.username);
       console.log(localStorage.getItem('user'));
       navigate('/');
+    } else {
+      alert('Username or password are incorrect')
     }
   }
 

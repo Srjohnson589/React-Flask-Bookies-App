@@ -53,9 +53,10 @@ class User(db.Model, UserMixin):
                                 backref= "followed_by",
                                 lazy='dynamic')
 
-    def __init__ (self, username, password):
+    def __init__ (self, username, password, profile_pic=''):
         self.username = username
         self.password = generate_password_hash(password)
+        self.profile_pic = profile_pic
 
     def save(self):
         db.session.add(self)

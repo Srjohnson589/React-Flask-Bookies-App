@@ -1,6 +1,7 @@
 import Nav from '/src/components/Nav/Nav.tsx';
 import './Friends.css';
 import { useContext , useEffect, useState} from 'react';
+import { Link } from 'react-router-dom'
 import UserContextProvider, { UserContext } from '../../context/UserContext';
 
 
@@ -15,7 +16,7 @@ const Friends = () => {
           const loggedInUser = localStorage.getItem('user');
           if (loggedInUser) {
             console.log(loggedInUser);
-            setUser({'username': loggedInUser})
+            setUser({...user,'username': loggedInUser})
           }
         }}, [user]);
 
@@ -72,7 +73,18 @@ const Friends = () => {
                 (otheruser, idx) => 
                 <>
                 <div className="profile-card" key={idx}>
-                    <img className="profile-pic" src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-login-interface-abstract-blue-icon-png-image_3917504.jpg" alt="" />
+                    {otheruser.profile_pic ? 
+                    <>
+                    <Link to={"/FriendsBooks"} state={{ friend: `${otheruser.username}`}}>
+                        <img className="following profile-pic" src={otheruser.profile_pic} alt="" /> 
+                    </Link>
+                    </>
+                    : 
+                    <>
+                    <Link to={"/FriendsBooks"} state={{ friend: `${otheruser.username}`}}>
+                        <img className="following profile-pic" src="https://cdn2.iconfinder.com/data/icons/hobby-butterscotch-vol-3/512/Reading-512.png" alt="" />
+                    </Link>
+                    </>}
                     <p className="user">{otheruser.username}</p>
                     <p onClick={()=> {unfollow(otheruser.username)}} className="follow-btn">Unfollow</p>
                 </div>
@@ -86,7 +98,9 @@ const Friends = () => {
                 (otheruser, idx) => 
                 <>
                 <div className="profile-card" key={idx}>
-                    <img className="profile-pic" src="https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-login-interface-abstract-blue-icon-png-image_3917504.jpg" alt="" />
+                    {otheruser.profile_pic ? 
+                    <img className="profile-pic" src={otheruser.profile_pic} alt="" /> 
+                    : <img className="profile-pic" src="https://cdn2.iconfinder.com/data/icons/hobby-butterscotch-vol-3/512/Reading-512.png" alt="" />}
                     <p className="user">{otheruser.username}</p>
                     <p onClick={()=> {follow(otheruser.username)}} className="follow-btn">Follow</p>
                 </div>

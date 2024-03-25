@@ -1,0 +1,21 @@
+.roulette-container {
+    width: 80vw;
+    margin: 40px auto;
+    margin-top: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid black;
+}
+
+.roulette-container h2 {
+    margin: 30px 0;
+}
+
+.cover-img {
+    height: 200px;
+    transition: height 0.6s ease-in-out;
+}
+
+.friendsnames {
+    margin-top: 30px;
+    font-weight: bold;
+}

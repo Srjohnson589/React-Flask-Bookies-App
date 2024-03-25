@@ -3,6 +3,8 @@ from flask import request, jsonify
 from app.models import db, User, Book
 
 
+##### Known issue: if missing certain payload info like "publisher" will not save book.
+
 # Add to To Read shelf
 @books_api.post('/add_to_read')
 def add_to_read():
@@ -23,24 +25,24 @@ def add_to_read():
     print(data)
     queried_user = User.query.filter(User.username == data['username']).first()
     book = Book.query.filter(Book.title == data['title']).first()
-    if not book:
-        if data['googlerating']:
-            new_book = Book(title=data['title'], 
-                    author=data['author'], 
-                    thumbnail=data['thumbnail'], 
-                    publisher=data['publisher'], 
-                    published=data['published'],
-                    description=data['description'],
-                    googlerating=data['googlerating'])
-            new_book.save()
-        else:
-            new_book = Book(title=data['title'], 
-                            author=data['author'], 
-                            thumbnail=data['thumbnail'], 
-                            publisher=data['publisher'], 
-                            published=data['published'],
-                            description=data['description'])
-            new_book.save()
+    try:
+        rating = data['googlerating']
+        new_book = Book(title=data['title'], 
+                        author=data['author'], 
+                        thumbnail=data['thumbnail'], 
+                        publisher=data['publisher'], 
+                        published=data['published'],
+                        description=data['description'],
+                        googlerating=data['googlerating'])
+        new_book.save()
+    except:
+        new_book = Book(title=data['title'], 
+                        author=data['author'], 
+                        thumbnail=data['thumbnail'], 
+                        publisher=data['publisher'], 
+                        published=data['published'],
+                        description=data['description'])
+        new_book.save()
     queried_book = Book.query.filter(Book.title == data['title']).first()
     if queried_book not in queried_user.to_read_shelf:
         queried_user.to_read_shelf.append(queried_book)
@@ -153,24 +155,24 @@ def add_current():
     data = request.get_json()
     queried_user = User.query.filter(User.username == data['username']).first()
     book = Book.query.filter(Book.title == data['title']).first()
-    if not book:
-        if data['googlerating']:
-            new_book = Book(title=data['title'], 
-                            author=data['author'], 
-                            thumbnail=data['thumbnail'], 
-                            publisher=data['publisher'], 
-                            published=data['published'],
-                            description=data['description'],
-                            googlerating=data['googlerating'])
-            new_book.save()
-        else:
-            new_book = Book(title=data['title'], 
-                            author=data['author'], 
-                            thumbnail=data['thumbnail'], 
-                            publisher=data['publisher'], 
-                            published=data['published'],
-                            description=data['description'])
-            new_book.save()
+    try:
+        rating = data['googlerating']
+        new_book = Book(title=data['title'], 
+                        author=data['author'], 
+                        thumbnail=data['thumbnail'], 
+                        publisher=data['publisher'], 
+                        published=data['published'],
+                        description=data['description'],
+                        googlerating=data['googlerating'])
+        new_book.save()
+    except:
+        new_book = Book(title=data['title'], 
+                        author=data['author'], 
+                        thumbnail=data['thumbnail'], 
+                        publisher=data['publisher'], 
+                        published=data['published'],
+                        description=data['description'])
+        new_book.save()
     queried_book = Book.query.filter(Book.title == data['title']).first()
     if queried_book not in queried_user.current_shelf:
         queried_user.current_shelf.append(queried_book)
@@ -441,3 +443,81 @@ def getBook(title):
             'message': 'Book does not exist'
         })
     
+
+@books_api.post('/add_friends_read')
+def add_friends_read():
+    '''
+    payload should include
+    {
+    'username' = 'string'
+    'title' = 'string'
+    }
+    '''
+    data = request.get_json()
+    print(data)
+    queried_user = User.query.filter(User.username == data['username']).first()
+    queried_book = Book.query.filter(Book.title == data['title']).first()
+    if queried_book not in queried_user.read_shelf:
+        queried_user.read_shelf.append(queried_book)
+        db.session.commit()
+        return jsonify({
+            'status': 'ok',
+            'message': 'Book was added to \'read\''
+            })
+    else:
+        return jsonify({
+            'status': 'not ok',
+            'message': 'Book was already in user\'s \'read\' shelf'
+            })
+    
+@books_api.post('/add_friends_to_read')
+def add_friends_to_read():
+    '''
+    payload should include
+    {
+    'username' = 'string'
+    'title' = 'string'
+    }
+    '''
+    data = request.get_json()
+    print(data)
+    queried_user = User.query.filter(User.username == data['username']).first()
+    queried_book = Book.query.filter(Book.title == data['title']).first()
+    if queried_book not in queried_user.to_read_shelf:
+        queried_user.to_read_shelf.append(queried_book)
+        db.session.commit()
+        return jsonify({
+            'status': 'ok',
+            'message': 'Book was added to \'to read\''
+            })
+    else:
+        return jsonify({
+            'status': 'not ok',
+            'message': 'Book was already in user\'s \'to read\' shelf'
+            })
+    
+@books_api.post('/add_friends_current')
+def add_friends_current():
+    '''
+    payload should include
+    {
+    'username' = 'string'
+    'title' = 'string'
+    }
+    '''
+    data = request.get_json()
+    print(data)
+    queried_user = User.query.filter(User.username == data['username']).first()
+    queried_book = Book.query.filter(Book.title == data['title']).first()
+    if queried_book not in queried_user.current_shelf:
+        queried_user.current_shelf.append(queried_book)
+        db.session.commit()
+        return jsonify({
+            'status': 'ok',
+            'message': 'Book was added to \'current\''
+            })
+    else:
+        return jsonify({
+            'status': 'not ok',
+            'message': 'Book was already in user\'s \'current\' shelf'
+            })

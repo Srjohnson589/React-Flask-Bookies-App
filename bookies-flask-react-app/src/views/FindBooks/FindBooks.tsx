@@ -38,7 +38,7 @@ const FindBooks = () => {
                 let info_dict = {
                     username: user.username,
                     title: data.items[i].volumeInfo.title,
-                    thumbnail: data.items[i].volumeInfo.imageLinks.small,
+                    thumbnail: data.items[i].volumeInfo.imageLinks.thumbnail,
                     description: data.items[i].volumeInfo.description,
                     published: data.items[i].volumeInfo.publishedDate.slice(0,4)
                 };

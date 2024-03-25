@@ -6,6 +6,7 @@ import MyBooks from '/src/views/MyBooks/MyBooks.tsx'
 import Book from '/src/views/Book/Book.tsx'
 import Friends from '/src/views/Friends/Friends.tsx'
 import Profile from '/src/views/Profile/Profile.tsx'
+import FriendsBooks from '/src/views/FriendsBooks/FriendsBooks.tsx'
 import {Route, RouterProvider, Routes} from 'react-router-dom';
 import './App.css'
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Book" element={<Book/>}/>
         <Route path="/Friends" element={<Friends/>}/>
         <Route path="/Profile" element={<Profile/>} />
+        <Route path="/FriendsBooks" element={<FriendsBooks/>} />
       </Routes>
     </>
   )

@@ -1,7 +1,8 @@
 import Nav from '/src/components/Nav/Nav.tsx';
-import Roulette from '/src/components/home/Roulette/Roulette.tsx'
+import FriendCurrent from '/src/components/home/FriendCurrent/FriendCurrent.tsx';
+import Current from '/src/components/home/Current/Current.tsx'
 import { useContext, useEffect } from 'react';
-import { UserContext } from '../../context/UserContext';
+import { UserContext } from '/src/context/UserContext.tsx';
 
 const Home = () => {
     
@@ -18,11 +19,12 @@ const Home = () => {
     return (
         <> 
           <Nav/>
-          <Roulette />
+          <FriendCurrent />
           {user.username === '' &&
           <h2 id="signup-heading">Sign up to find friends and start your book list!</h2>}
           {user.username && 
           <h2 >Welcome back, {user.username}!</h2>}
+          <Current />
         </>
     )
     }

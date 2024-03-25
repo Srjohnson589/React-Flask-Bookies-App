@@ -9,10 +9,6 @@
 }
 
 .cover-img {
-    height: 300px;
+    height: 100px;
     transition: height 0.6s ease-in-out;
-}
-
-.cover-img:hover {
-    height: 400px;
 }

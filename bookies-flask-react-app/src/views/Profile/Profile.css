@@ -23,8 +23,25 @@
 }
 
 .example-img {
-    border: 5px solid rgb(46, 29, 10);
     width: 150px;
     border-radius: 150px;
     margin: 10px;
+}
+
+.example-img:hover, .example-img:visited {
+    border: 2px solid rgb(132, 94, 19);
+}
+
+.save-btn {
+    display: inline;
+    background-color: rgb(255, 208, 0);
+    padding: 4px 10px;
+    border-radius: 2px;
+    border: 1px solid darkgoldenrod;
+    color: rgb(20, 13, 2);
+}
+
+.save-btn:hover {
+    background-color: rgb(251, 191, 118);
+    cursor: pointer;
 }

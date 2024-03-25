@@ -1,0 +1,19 @@
+
+.current-container{
+    display: flex;
+    justify-content: center;
+}
+
+.current-book {
+    margin: 20px 40px;
+}
+
+.current-book img {
+    height: 180px;
+}
+
+.current-book .title {
+    margin: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
