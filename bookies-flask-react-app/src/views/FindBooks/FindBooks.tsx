@@ -8,6 +8,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import {MDBCard,MDBCardTitle,MDBCardText,MDBCardBody,MDBCardImage,MDBRow,MDBCol} from "mdb-react-ui-kit";
+import { Rating } from '@mui/material';
+
 
 const FindBooks = () => {
 
@@ -36,7 +38,8 @@ const FindBooks = () => {
                 let info_dict = {
                     username: user.username,
                     title: data.items[i].volumeInfo.title,
-                    thumbnail: data.items[i].volumeInfo.imageLinks.thumbnail,
+                    thumbnail: data.items[i].volumeInfo.imageLinks.small,
+                    description: data.items[i].volumeInfo.description,
                     published: data.items[i].volumeInfo.publishedDate.slice(0,4)
                 };
                 try {
@@ -49,6 +52,11 @@ const FindBooks = () => {
                 } catch {
                     info_dict.publisher = '';
                 }
+                try {
+                  info_dict.googlerating = data.items[i].volumeInfo.averageRating;
+              } catch {
+                  info_dict.googlerating = 0;
+              }
                 results.push(info_dict);
                 i++;
             } catch {
@@ -120,6 +128,7 @@ const FindBooks = () => {
                     <MDBCardTitle>{book.title}</MDBCardTitle>
                     <MDBCardText>by {book.author}</MDBCardText>
                     <MDBCardText><small>{book.publisher} {book.published}</small></MDBCardText>
+                    {book.googlerating && <Rating name="half-rating-read" value={book.googlerating} precision={0.5} readOnly />}
                 </MDBCardBody>
             </MDBCol>
             <MDBCol md='2'>

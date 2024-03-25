@@ -22,10 +22,17 @@ user_read = db.Table(
     db.Column('book_id', db.Integer, db.ForeignKey('book.book_id'))
 )
 
+follower_followed = db.Table(
+    'follower_followed',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.user_id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.user_id'))
+)
+
 class User(db.Model, UserMixin):
     user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
+    profile_pic = db.Column(db.String, nullable=True)
     to_read_shelf = db.relationship('Book',
                              secondary=user_to_read,
                              backref="wants_to_read_by",
@@ -39,6 +46,12 @@ class User(db.Model, UserMixin):
                              backref="already_read_by",
                              lazy="dynamic")
     my_reviews = db.relationship('Review', backref='author')
+    following = db.relationship('User',
+                                secondary= follower_followed,
+                                primaryjoin = (follower_followed.columns.follower_id == user_id),
+                                secondaryjoin = (follower_followed.columns.followed_id == user_id),
+                                backref= "followed_by",
+                                lazy='dynamic')
 
     def __init__ (self, username, password):
         self.username = username
@@ -58,14 +71,18 @@ class Book(db.Model):
     thumbnail = db.Column(db.String, nullable=True)
     publisher = db.Column(db.String, nullable=True)
     published = db.Column(db.String, nullable=True)
+    description = db.Column(db.String, nullable=True)
+    googlerating = db.Column(db.Integer, nullable=True)
     reviews = db.relationship('Review', backref='book_reviewed')
 
-    def __init__(self, title, author, thumbnail='', publisher='', published=''):
+    def __init__(self, title, author, thumbnail='', publisher='', published='', description='', googlerating=0):
         self.title = title
         self.author = author
         self.thumbnail = thumbnail
         self.publisher = publisher
         self.published = published
+        self.description = description
+        self.googlerating = googlerating
 
     def save(self):
         db.session.add(self)
@@ -73,12 +90,12 @@ class Book(db.Model):
 
 class Review(db.Model):
     review_id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.Integer, nullable=False)
+    rating = db.Column(db.Integer, nullable=True)
     book_id = db.Column(db.Integer, db.ForeignKey('book.book_id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     text = db.Column(db.String, nullable=True)
 
-    def __init__(self, rating, book_id, user_id, text=''):
+    def __init__(self, book_id, user_id, rating=0, text=''):
         self.rating = rating
         self.book_id = book_id
         self.user_id = user_id

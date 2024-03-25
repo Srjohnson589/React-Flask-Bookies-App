@@ -2,14 +2,19 @@
 .book-searchbar {
     display: flex;
     align-items: center;
+    background-color: rgba(166, 88, 24, 0.834);
     margin-top: 5%;
     justify-content: center;
     width: 65%;
     margin: 80px auto;
     margin-bottom: 10px;
+    padding: 40px;
+    border-radius: 5px;
+    padding-right: 50px;
 }
 
 #findbook-input {
+    color: white;
     border-radius: 50px;
     padding-left: 30px;
     font-weight: 800;

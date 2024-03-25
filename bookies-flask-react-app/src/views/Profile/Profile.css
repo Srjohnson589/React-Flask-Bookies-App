@@ -1,0 +1,30 @@
+.profile-img {
+    border-radius: 150px;
+    width: 200px;
+    margin: 40px;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-container h4 {
+    width: 180px;
+}
+
+.examples-div {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 50px;
+}
+
+.example-img {
+    border: 5px solid rgb(46, 29, 10);
+    width: 150px;
+    border-radius: 150px;
+    margin: 10px;
+}

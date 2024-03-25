@@ -12,6 +12,10 @@
     margin: 20px 0 -20px 20px;
 }
 
+.bookies-logo:hover {
+    cursor: pointer;
+}
+
 .signupbuttons {
     padding: 20px;
     margin-right: 20px;
@@ -22,21 +26,26 @@
     text-wrap: nowrap;
     background-color: rgb(255, 222, 173);
     border-radius: 5px;
-    padding: 5px 8px
+    padding: 5px 8px;
+    color: rgb(46, 35, 29);
+}
+
+#currentuser:hover {
+    background-color: rgb(241, 198, 133);
 }
 
 .navlink {
     padding: 0 5px;
 }
 
-#logout-btn, #mybooks-btn, #findbooks-btn, .navlink {
-    padding: 5px 0;
+#logout-btn, #mybooks-btn, #findbooks-btn, #friends-btn, .navlink {
+    padding: 5px 10px;
     font-family: 'Quicksand', sans-serif;
     color: rgb(46, 35, 29);
     margin: 0;
     text-wrap: nowrap;
 }
 
-#logout-btn:hover, #mybooks-btn:hover, #findbooks-btn:hover, .navlink:hover {
+#logout-btn:hover, #mybooks-btn:hover, #findbooks-btn:hover, #friends-btn:hover, .navlink:hover {
     color: rgb(149, 86, 49);
 }

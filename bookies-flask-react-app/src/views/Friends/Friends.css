@@ -1,0 +1,35 @@
+.users-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    margin: 30px auto;
+}
+
+.profile-card {
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.user {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+.profile-pic {
+    width: 100px;
+    border-radius: 50px;
+}
+
+.follow-btn {
+    font-size: 0.8rem;
+    border: 1px solid gray;
+    width: 60px;
+    margin: 10px auto 20px auto;
+}
+
+.follow-btn:hover {
+    background-color: rgb(51, 44, 34);
+    color: white;
+    cursor: pointer;
+}

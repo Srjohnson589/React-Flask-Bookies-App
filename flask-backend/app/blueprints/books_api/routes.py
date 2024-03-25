@@ -15,14 +15,32 @@ def add_to_read():
     'thumbnail' = 'string'
     'publisher' = 'string'
     'published' = 'string'
+    'description' = 'string'
+    'googlerating' = 'number'
     }
     '''
     data = request.get_json()
+    print(data)
     queried_user = User.query.filter(User.username == data['username']).first()
     book = Book.query.filter(Book.title == data['title']).first()
     if not book:
-        new_book = Book(title=data['title'], author=data['author'], thumbnail=data['thumbnail'], publisher=data['publisher'], published=data['published'])
-        new_book.save()
+        if data['googlerating']:
+            new_book = Book(title=data['title'], 
+                    author=data['author'], 
+                    thumbnail=data['thumbnail'], 
+                    publisher=data['publisher'], 
+                    published=data['published'],
+                    description=data['description'],
+                    googlerating=data['googlerating'])
+            new_book.save()
+        else:
+            new_book = Book(title=data['title'], 
+                            author=data['author'], 
+                            thumbnail=data['thumbnail'], 
+                            publisher=data['publisher'], 
+                            published=data['published'],
+                            description=data['description'])
+            new_book.save()
     queried_book = Book.query.filter(Book.title == data['title']).first()
     if queried_book not in queried_user.to_read_shelf:
         queried_user.to_read_shelf.append(queried_book)
@@ -54,24 +72,27 @@ def show_shelves():
     to_read = []
     current = []
     read = []
-    for book in queried_user.to_read_shelf:
-        to_read.append(
-            {'title': book.title,
-            'author': book.author,
-            'thumbnail': book.thumbnail,
-            })
-    for book in queried_user.current_shelf:
-        current.append(
-            {'title': book.title,
+    if queried_user.to_read_shelf:
+        for book in queried_user.to_read_shelf:
+            to_read.append(
+                {'title': book.title,
                 'author': book.author,
                 'thumbnail': book.thumbnail,
                 })
-    for book in queried_user.read_shelf:
-        read.append(
-            {'title': book.title,
-                'author': book.author,
-                'thumbnail': book.thumbnail,
-                })
+    if queried_user.current_shelf:
+        for book in queried_user.current_shelf:
+            current.append(
+                {'title': book.title,
+                    'author': book.author,
+                    'thumbnail': book.thumbnail,
+                    })
+    if queried_user.read_shelf:
+        for book in queried_user.read_shelf:
+            read.append(
+                {'title': book.title,
+                    'author': book.author,
+                    'thumbnail': book.thumbnail,
+                    })
     print(current)
     return jsonify({
         'status': 'ok',
@@ -125,14 +146,31 @@ def add_current():
     'thumbnail' = 'string'
     'publisher' = 'string'
     'published' = 'string'
+    'description' = 'string'
+    'googlerating' = 'number
     }
     '''
     data = request.get_json()
     queried_user = User.query.filter(User.username == data['username']).first()
     book = Book.query.filter(Book.title == data['title']).first()
     if not book:
-        new_book = Book(title=data['title'], author=data['author'], thumbnail=data['thumbnail'], publisher=data['publisher'], published=data['published'])
-        new_book.save()
+        if data['googlerating']:
+            new_book = Book(title=data['title'], 
+                            author=data['author'], 
+                            thumbnail=data['thumbnail'], 
+                            publisher=data['publisher'], 
+                            published=data['published'],
+                            description=data['description'],
+                            googlerating=data['googlerating'])
+            new_book.save()
+        else:
+            new_book = Book(title=data['title'], 
+                            author=data['author'], 
+                            thumbnail=data['thumbnail'], 
+                            publisher=data['publisher'], 
+                            published=data['published'],
+                            description=data['description'])
+            new_book.save()
     queried_book = Book.query.filter(Book.title == data['title']).first()
     if queried_book not in queried_user.current_shelf:
         queried_user.current_shelf.append(queried_book)
@@ -190,13 +228,31 @@ def add_read():
     'thumbnail' = 'string'
     'publisher' = 'string'
     'published' = 'string'
+    'description' = 'string'
+    'googlerating' = 'number'
     }
     '''
     data = request.get_json()
+    print(data)
     queried_user = User.query.filter(User.username == data['username']).first()
     book = Book.query.filter(Book.title == data['title']).first()
-    if not book:
-        new_book = Book(title=data['title'], author=data['author'], thumbnail=data['thumbnail'], publisher=data['publisher'], published=data['published'])
+    try:
+        rating = data['googlerating']
+        new_book = Book(title=data['title'], 
+                        author=data['author'], 
+                        thumbnail=data['thumbnail'], 
+                        publisher=data['publisher'], 
+                        published=data['published'],
+                        description=data['description'],
+                        googlerating=data['googlerating'])
+        new_book.save()
+    except:
+        new_book = Book(title=data['title'], 
+                        author=data['author'], 
+                        thumbnail=data['thumbnail'], 
+                        publisher=data['publisher'], 
+                        published=data['published'],
+                        description=data['description'])
         new_book.save()
     queried_book = Book.query.filter(Book.title == data['title']).first()
     if queried_book not in queried_user.read_shelf:
@@ -362,3 +418,26 @@ def make_to_read():
                 'status': 'not ok',
                 'message': 'No user found'
                 })
+    
+@books_api.get('/getBook/<title>')
+def getBook(title):
+    queried_book = Book.query.filter(Book.title == title).first()
+    print(queried_book)
+    if queried_book:
+        return jsonify({
+            'status': 'ok',
+            'message': 'Book found',
+            'title': queried_book.title,
+            'author': queried_book.author,
+            'publisher': queried_book.publisher,
+            'published': queried_book.published,
+            'thumbnail': queried_book.thumbnail,
+            'description': queried_book.description,
+            'googlerating': queried_book.googlerating
+        })
+    else:
+        return jsonify({
+            'status': 'not ok',
+            'message': 'Book does not exist'
+        })
+    

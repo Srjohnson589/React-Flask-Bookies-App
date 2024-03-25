@@ -9,28 +9,23 @@ def add_review():
     payload should include
     {
     'rating' = 'int'
-    'user_id' = 'int'
-    'book_id' = 'int'
-    'text' = 'optional'
+    'username' = 'string'
+    'title' = 'string'
+    'text' = 'could be blank'
     }
     '''
     data = request.get_json()
     try:
-        if not Review.query.filter(Review.book_id == data['book_id'], Review.user_id == data['user_id']).first():
-            if 'text' not in data:
-                new_review = Review(rating=data['rating'], book_id=data['book_id'], user_id=data['user_id'])
-                new_review.save()
-                return jsonify({
-                    'status': 'ok',
-                    'message': 'Review was added'
-                    })
-            else:
-                new_review = Review(rating=data['rating'], book_id=data['book_id'], user_id=data['user_id'], text=data['text'])
-                new_review.save()
-                return jsonify({
-                    'status': 'ok',
-                    'message': 'Review was added'
-                    })
+        print(data)
+        queried_user = User.query.filter(User.username == data['username']).first()
+        queried_book = Book.query.filter(Book.title == data['title']).first()
+        if not Review.query.filter(Review.book_id == queried_book.book_id, Review.user_id == queried_user.user_id).first():
+            new_review = Review(rating=data['rating'], book_id=queried_book.book_id, user_id=queried_user.user_id, text=data['text'])
+            new_review.save()
+            return jsonify({
+                'status': 'ok',
+                'message': 'Review was successfully added'
+                })
         else:
             return jsonify({
                 'status': 'not ok',
@@ -43,27 +38,19 @@ def add_review():
                 })
     
 #Get all reviews for a book
-@reviews_api.get('/get_reviews')
-def get_reviews():
-    '''
-    payload should include
-    {
-    'book_id' = 'int'
-    }
-    '''
-    data = request.get_json()
-    book = Book.query.filter(Book.book_id == data['book_id']).first()
+@reviews_api.get('/get_reviews/<title>')
+def get_reviews(title):
+    print(title)
+    book = Book.query.filter(Book.title == title).first()
     reviews_list = []
     for review in book.reviews:
         author = review.author
         review_dict = {
-            'id': review.review_id,
             'rating': review.rating,
             'username': author.username,
             'text': review.text
             }
         reviews_list.append(review_dict)
-    
     return jsonify({'reviews': reviews_list, 'status': 'ok'})
 
 #Update a review

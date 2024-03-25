@@ -1,0 +1,75 @@
+
+.singlebook-container {
+    width: 80%;
+    text-align: left;
+    padding: 40px;
+    border: 1px solid gray;
+    margin: 30px auto;
+    margin-bottom: 60px;
+}
+
+.img-title {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.mainbook-img {
+    height: 300px;
+}
+
+.mainbook-info {
+    text-align: left;
+    margin-left: 30px;
+}
+
+.review-form {
+    background-color: white;
+    width: 80%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 40px auto;
+}
+
+.review-header {
+    text-align: left;
+}
+
+.review-text {
+    width: 100%;
+}
+
+.review-btn {
+    align-self: center;
+    width: 300px;
+    margin: 30px auto 10px auto;
+    border: 1px solid rgb(121, 68, 14);
+    color: rgb(63, 30, 10);
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.review-btn:hover {
+    background-color: rgb(230, 208, 173);
+    cursor: pointer;
+}
+
+.review-card {
+    background-color: rgb(243, 193, 136);
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 3px;
+    text-align: left;
+    padding: 20px;
+}
+
+.review-card p {
+    margin-bottom: 5px;
+}
+
+.rating-form {
+    width: 100%;
+    text-align: left;
+    margin: 30px 0 10px 0;
+}

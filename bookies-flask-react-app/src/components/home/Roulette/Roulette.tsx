@@ -27,9 +27,12 @@ const responsive = {
   
   const Roulette = () => {
     
-    const [topFive, setTopFive] = useState(['https://storage.googleapis.com/du-prd/books/images/9781250178633.jpg', 'https://storage.googleapis.com/du-prd/books/images/9781649374042.jpg', 'https://storage.googleapis.com/du-prd/books/images/9781649374172.jpg', 'https://storage.googleapis.com/du-prd/books/images/9781250337320.jpg', 'https://storage.googleapis.com/du-prd/books/images/9780593599839.jpg']);
+    const [topFive, setTopFive] = useState([]);
 
-    // useEffect(() => {getBestsellers()}, []);
+    useEffect(() => {
+      if (topFive.length === 0){
+        getBestsellers()
+      }}, [topFive]);
 
     const getBestsellers = async () => {
       const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${import.meta.env.VITE_NYT_KEY}`);
@@ -55,7 +58,7 @@ const responsive = {
     
     return (
     <div className="roulette-container">
-        <h2>Today's NYT Bestsellers</h2>
+        <h2>Friends Current Reads</h2>
         <Carousel responsive={responsive}>
           <div className="carousel-img"><img className="cover-img" src={topFive[0]} alt="current bestseller cover" /><p>#1</p></div>
           <div className="carousel-img"><img className="cover-img" src={topFive[1]} alt="current bestseller cover" /><p>#2</p></div>
