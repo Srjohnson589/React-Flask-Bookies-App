@@ -1,18 +1,41 @@
-.signupbuttons {
+
+.chatbot-icon {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    width: 70px;
+    z-index: 1;
+}
+
+.chatbot-icon:hover {
+    cursor: pointer;
+}
+
+.chat-body{
+    background-color: rgb(254, 199, 116);
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    width: 500px;
     padding: 20px;
-    background-color: rgb(104, 201, 246);
-    border-radius: 20px;
-    margin-right: 40px;
+    padding-left: 30px;
+    border-radius: 10px;
+    text-align: left;
+    border: 1px solid rgb(22, 2, 2);
 }
 
-#findbooks-btn {
-    background: green;
+.chat-input {
+    line-height: 2;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: whitesmoke;
+    padding-left: 20px;
+    width: 80%;
 }
 
-#mybooks-btn {
-    background: yellow;
-}
-
-#signup-heading {
-    margin: 30px 0;
+.bot {
+    padding: 5px 20px;
+    border-radius: 2px;
+    background-color: rgb(75, 56, 7);
+    color: white;
 }

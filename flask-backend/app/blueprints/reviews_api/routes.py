@@ -1,6 +1,8 @@
 from . import reviews_api
 from flask import request, jsonify
 from app.models import db, User, Book, Review
+from openai import OpenAI
+client = OpenAI()
 
 # Add a Review
 @reviews_api.post('/add_review')
@@ -92,3 +94,27 @@ def delete_review():
         return jsonify({'status': 'ok', 'message': 'Review deleted'})
     else:
         return jsonify({'status': 'not ok', 'message': 'No review at id'})
+    
+@reviews_api.post('/chatgpt')
+def chatgpt():
+    '''
+    payload should include
+    {
+    'message' = [],
+    }
+    '''
+    data = request.get_json()
+    message = data['message']
+    print(message)
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=message,
+        temperature=1,
+        max_tokens=100,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
+        )
+    chat_response = completion.choices[0].message.content
+    return jsonify({'status': 'ok', 
+                    'message': chat_response})
