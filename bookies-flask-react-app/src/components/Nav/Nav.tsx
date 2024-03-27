@@ -46,10 +46,10 @@ const Nav = () => {
                     :
                     <>
                     <Link to={"/signup"} className="text-decoration-none">
-                        <h6 className="navlink">Sign Up</h6>
+                        <h6 className="login-btn">Sign Up</h6>
                     </Link>
                     <Link to={"/login"} className="text-decoration-none">
-                        <h6 className="navlink">Login</h6>
+                        <h6 className="login-btn">Login</h6>
                     </Link>
                     </>
                     }

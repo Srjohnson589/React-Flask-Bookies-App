@@ -131,62 +131,64 @@ const MyBooks = () => {
   return (
     <>
         <Nav/>
-        <h1 className="shelf-h">Bookshelves</h1>
-        <div className="shelf-backdrop">
-          <p className="shelf-title">To Read</p>
-          <div className="shelf">
-              {toRead && toRead.map((book, idx) => 
-              <>
-                <div key={idx} className="bookcard">
-                  <Link to={"/Book"} state={{ title: `${book.title}`}}>
-                     <img className="shelf-covers" src={book.thumbnail}></img>
-                  </Link>
-                  <div>
-                    <Tooltip title="Finish"><CheckIcon className="list-icons" onClick={() => makeRead(book.title)} /></Tooltip>
-                    <Tooltip title="Current"><StarBorderIcon className="list-icons" onClick={() => makeCurrent(book.title)}/></Tooltip>
-                    <Tooltip title="Delete"><ClearIcon className="list-icons" onClick={() => removeToRead({idx})} /></Tooltip>
+        <div className="bookshelves-body">
+          <h1>Bookshelves</h1>
+          <div className="shelf-backdrop">
+            <p className="shelf-title">To Read</p>
+            <div className="shelf">
+                {toRead && toRead.map((book, idx) => 
+                <>
+                  <div key={idx} className="bookcard">
+                    <Link to={"/Book"} state={{ title: `${book.title}`}}>
+                      <img className="shelf-covers" src={book.thumbnail}></img>
+                    </Link>
+                    <div>
+                      <Tooltip title="Finish"><CheckIcon className="list-icons" onClick={() => makeRead(book.title)} /></Tooltip>
+                      <Tooltip title="Current"><StarBorderIcon className="list-icons" onClick={() => makeCurrent(book.title)}/></Tooltip>
+                      <Tooltip title="Delete"><ClearIcon className="list-icons" onClick={() => removeToRead({idx})} /></Tooltip>
+                    </div>
                   </div>
-                </div>
-              </>
-              )}
+                </>
+                )}
+            </div>
           </div>
-        </div>
-        <div className="shelf-backdrop">
-          <p className="shelf-title">Current Reading</p>
-          <div className="shelf">
-              {current && current.map((book, idx) => 
-              <>
-                <div key={idx} className="bookcard">
-                  <Link to={"/Book"} state={{ title: `${book.title}`}}>
-                     <img className="shelf-covers" src={book.thumbnail}></img>
-                  </Link>
-                  <div>
-                    <Tooltip title="Finish"><CheckIcon className="list-icons" onClick={() => makeRead(book.title)}/></Tooltip>
-                    <Tooltip title="To Read"><BookmarkBorderIcon className="list-icons" onClick={() => makeToRead(book.title)}/></Tooltip>
-                    <Tooltip title="Delete"><ClearIcon className="list-icons" onClick={() => removeCurrent({idx})} /></Tooltip>
+          <div className="shelf-backdrop">
+            <p className="shelf-title">Current Reading</p>
+            <div className="shelf">
+                {current && current.map((book, idx) => 
+                <>
+                  <div key={idx} className="bookcard">
+                    <Link to={"/Book"} state={{ title: `${book.title}`}}>
+                      <img className="shelf-covers" src={book.thumbnail}></img>
+                    </Link>
+                    <div>
+                      <Tooltip title="Finish"><CheckIcon className="list-icons" onClick={() => makeRead(book.title)}/></Tooltip>
+                      <Tooltip title="To Read"><BookmarkBorderIcon className="list-icons" onClick={() => makeToRead(book.title)}/></Tooltip>
+                      <Tooltip title="Delete"><ClearIcon className="list-icons" onClick={() => removeCurrent({idx})} /></Tooltip>
+                    </div>
                   </div>
-                </div>
-              </>
-              )}
+                </>
+                )}
+            </div>
           </div>
-        </div>
-        <div className="shelf-backdrop">
-          <p className="shelf-title">Past Reads</p>
-          <div className="shelf">
-              {read && read.map((book, idx) => 
-              <>
-                <div key={idx} className="bookcard">
-                  <Link to={"/Book"} state={{ title: `${book.title}`}}>
-                     <img className="shelf-covers" src={book.thumbnail}></img>
-                  </Link>
-                  <div>
-                    <Tooltip title="To Read"><BookmarkBorderIcon className="list-icons" onClick={() => makeToRead(book.title)}/></Tooltip>
-                    <Tooltip title="Current"><StarBorderIcon className="list-icons" onClick={() => makeCurrent(book.title)} /></Tooltip>
-                    <Tooltip title="Delete"><ClearIcon className="list-icons" onClick={() => removeRead({idx})} /></Tooltip>
+          <div className="shelf-backdrop">
+            <p className="shelf-title">Past Reads</p>
+            <div className="shelf">
+                {read && read.map((book, idx) => 
+                <>
+                  <div key={idx} className="bookcard">
+                    <Link to={"/Book"} state={{ title: `${book.title}`}}>
+                      <img className="shelf-covers" src={book.thumbnail}></img>
+                    </Link>
+                    <div>
+                      <Tooltip title="To Read"><BookmarkBorderIcon className="list-icons" onClick={() => makeToRead(book.title)}/></Tooltip>
+                      <Tooltip title="Current"><StarBorderIcon className="list-icons" onClick={() => makeCurrent(book.title)} /></Tooltip>
+                      <Tooltip title="Delete"><ClearIcon className="list-icons" onClick={() => removeRead({idx})} /></Tooltip>
+                    </div>
                   </div>
-                </div>
-              </>
-              )}
+                </>
+                )}
+            </div>
           </div>
         </div>
     </>

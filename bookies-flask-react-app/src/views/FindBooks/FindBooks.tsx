@@ -118,23 +118,23 @@ const FindBooks = () => {
         </div>
         <div className="booksearch">
         {returnResults && returnResults.map((book, idx) => 
-        <MDBCard key={idx} style={{ maxWidth: '650px' }} id="booksearch-results" alignment='center'>
+        <MDBCard key={idx} id="booksearch-results" alignment='center'>
         <MDBRow className='g-0'>
             <MDBCol md='4'>
                 <MDBCardImage className="book-img" src={book.thumbnail} alt='...' fluid />
             </MDBCol>
             <MDBCol md='6'>
                 <MDBCardBody className="text-start">
-                    <MDBCardTitle>{book.title}</MDBCardTitle>
-                    <MDBCardText>by {book.author}</MDBCardText>
-                    <MDBCardText><small>{book.publisher} {book.published}</small></MDBCardText>
+                    <MDBCardTitle className="book-title">{book.title}</MDBCardTitle>
+                    <MDBCardText className="book-author">by {book.author}</MDBCardText>
+                    <MDBCardText className="book-publishing">{book.publisher} {book.published}</MDBCardText>
                     {book.googlerating && <Rating name="half-rating-read" value={book.googlerating} precision={0.5} readOnly />}
                 </MDBCardBody>
             </MDBCol>
             <MDBCol md='2'>
-                <div id="add-btn" onClick={() => {addToRead(idx)}}><BookmarkBorderIcon className="btn-icon"/>To read</div>
-                <div id="read-btn" onClick={() => {addRead(idx)}}><CheckIcon className="btn-icon"/>Read</div>
-                <div id="current-btn" onClick={() => {addCurrent(idx)}}><StarBorderIcon className="btn-icon"/>Current</div>
+                <div id="add-btn" onClick={() => {addToRead(idx)}}><BookmarkBorderIcon className="btn-icon"/><p>To read</p></div>
+                <div id="read-btn" onClick={() => {addRead(idx)}}><CheckIcon className="btn-icon"/><p>Read</p></div>
+                <div id="current-btn" onClick={() => {addCurrent(idx)}}><StarBorderIcon className="btn-icon"/><p>Current</p></div>
             </MDBCol>
         </MDBRow>
         </MDBCard>

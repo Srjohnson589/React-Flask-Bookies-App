@@ -57,16 +57,18 @@ const responsive = {
     };
     
     return (
-    <div className="roulette-container">
-        <h2>Friends Current Reads</h2>
-        <Carousel responsive={responsive}>
-          <div className="carousel-img"><img className="cover-img" src={topFive[0]} alt="current bestseller cover" /><p>#1</p></div>
-          <div className="carousel-img"><img className="cover-img" src={topFive[1]} alt="current bestseller cover" /><p>#2</p></div>
-          <div className="carousel-img"><img className="cover-img" src={topFive[2]} alt="current bestseller cover" /><p>#3</p></div>
-          <div className="carousel-img"><img className="cover-img" src={topFive[3]} alt="current bestseller cover" /><p>#4</p></div>
-          <div className="carousel-img"><img className="cover-img" src={topFive[4]} alt="current bestseller cover" /><p>#5</p></div>
-        </Carousel>
-    </div>
+      <>
+        <div className="roulette-container">
+          <h2>NYT Bestsellers this week</h2>
+          <Carousel responsive={responsive}>
+            <div className="carousel-img"><img className="cover-img" src={topFive[0]} alt="current bestseller cover" /><p>#1</p></div>
+            <div className="carousel-img"><img className="cover-img" src={topFive[1]} alt="current bestseller cover" /><p>#2</p></div>
+            <div className="carousel-img"><img className="cover-img" src={topFive[2]} alt="current bestseller cover" /><p>#3</p></div>
+            <div className="carousel-img"><img className="cover-img" src={topFive[3]} alt="current bestseller cover" /><p>#4</p></div>
+            <div className="carousel-img"><img className="cover-img" src={topFive[4]} alt="current bestseller cover" /><p>#5</p></div>
+          </Carousel>
+        </div>
+      </>
   );
     }
   export default Roulette;

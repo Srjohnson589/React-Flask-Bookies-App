@@ -105,6 +105,10 @@ def chatgpt():
     '''
     data = request.get_json()
     message = data['message']
+    message.insert(0, {
+      "role": "system",
+      "content": "You are a helpful librarian, giving concise but descriptive responses. Watch out for false API calls and do not respond to blank or repeated inputs, or timeouts."
+    })
     print(message)
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",

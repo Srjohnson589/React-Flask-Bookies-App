@@ -1,19 +1,18 @@
 import Nav from '/src/components/Nav/Nav.tsx';
 import FriendCurrent from '/src/components/home/FriendCurrent/FriendCurrent.tsx';
-import Current from '/src/components/home/Current/Current.tsx'
+import Current from '/src/components/home/Current/Current.tsx';
+import Roulette from '/src/components/home/Roulette/Roulette.tsx'
 import './Home.css'
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '/src/context/UserContext.tsx';
+import { getListItemAvatarUtilityClass } from '@mui/material';
 
 const Home = () => {
     
     const {user, setUser} = useContext(UserContext);
     const [chatopen, setChatopen] = useState(false);
     const [newInput, setNewinput] = useState([]);
-    const [chatrecord, setChatrecord] = useState([{
-      "role": "system",
-      "content": "You are a helpful librarian, giving concise but descriptive responses. If you receive a blank input do not reply."
-    }]);
+    const [chatrecord, setChatrecord] = useState([]);
     const [typing, setTyping] = useState('');
 
     useEffect(() => {
@@ -52,10 +51,10 @@ const Home = () => {
       setNewinput([...newInput, m])
     }
 
-    const postReply = (reply) => {
+    const postReply = (r) => {
         setChatrecord([...chatrecord,{
           "role": "assistant",
-          "content": reply
+          "content": r
         }])
         setTyping('')
     }
@@ -63,18 +62,26 @@ const Home = () => {
     return (
         <> 
           <Nav/>
+          {user.username ?
+          <>
           <FriendCurrent />
-          {user.username === '' &&
-          <h2 id="signup-heading">Sign up to find friends and start your book list!</h2>}
-          {user.username && 
-          <h2 >Welcome back, {user.username}!</h2>}
           <Current />
+          </>:
+          <>
+          <Roulette/>
+           <h2 id="signup-heading">Sign up to find friends and start your book list!</h2>
+          </>
+          }
           <img onClick={()=>{setChatopen(!chatopen)}} className="chatbot-icon" src="https://i.pinimg.com/originals/ff/fb/48/fffb481f28a395fb8ad93e7ecd8f2ec7.png" ></img>
           {chatopen && 
            <div className="chat-body">
-              <p className="bot">I am your AI assistant! How can I help you today?</p>
+              <div className="convoline">
+                <p className="assistant">I am your AI assistant! How can I help you today?</p>
+              </div>
               {chatrecord.map((item, index) => (
-                <p key={index}>{item.content}</p>
+                <div className="convoline">
+                  <p className={item.role} key={index}>{item.content}</p>
+                </div>
               ))}
               <input
               value={typing}

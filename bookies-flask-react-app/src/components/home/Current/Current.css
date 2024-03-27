@@ -1,4 +1,16 @@
 
+.current-body{
+    background-color: rgb(233, 216, 193);
+    width: 60vw;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.currentreading {
+    font-size: 2.2rem;
+    padding: 30px;
+}
+
 .current-container{
     display: flex;
     justify-content: center;

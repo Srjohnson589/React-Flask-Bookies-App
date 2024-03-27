@@ -8,7 +8,7 @@
   
 
 .bookies-logo {
-    height: 100px;
+    height: 130px;
     margin: 20px 0 -20px 20px;
 }
 
@@ -22,30 +22,37 @@
 }
 
 #currentuser {
-    font-family: 'Quicksand', serif;
     text-wrap: nowrap;
     background-color: rgb(255, 222, 173);
     border-radius: 5px;
-    padding: 5px 8px;
+    padding: 10px 12px;
     color: rgb(46, 35, 29);
+    font-family: "Barlow", sans-serif;
+    font-size: 1.3rem;
 }
 
 #currentuser:hover {
-    background-color: rgb(241, 198, 133);
+    color: rgb(255, 246, 234);
+    background-color: rgb(38, 22, 6);
 }
 
-.navlink {
-    padding: 0 5px;
-}
-
-#logout-btn, #mybooks-btn, #findbooks-btn, #friends-btn, .navlink {
-    padding: 5px 10px;
-    font-family: 'Quicksand', sans-serif;
+#logout-btn, #mybooks-btn, #findbooks-btn, #friends-btn, .login-btn {
+    padding: 10px 12px;
+    font-size: 1.2rem;
+    font-weight: 400;
     color: rgb(46, 35, 29);
     margin: 0;
     text-wrap: nowrap;
+    font-family: "Barlow", sans-serif;
 }
 
-#logout-btn:hover, #mybooks-btn:hover, #findbooks-btn:hover, #friends-btn:hover, .navlink:hover {
-    color: rgb(149, 86, 49);
+#logout-btn:hover, #mybooks-btn:hover, #findbooks-btn:hover, #friends-btn:hover, .login-btn {
+    background-color: rgb(255, 222, 173);
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.login-btn:hover{
+    color: white;
+    background: rgb(101, 65, 12);
 }

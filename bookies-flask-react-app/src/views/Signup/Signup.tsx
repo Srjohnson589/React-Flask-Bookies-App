@@ -44,7 +44,8 @@ const Signup = () => {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label className="login-label">Username</Form.Label>
         <Form.Control 
-          type="text" 
+          type="text"
+          className="signup-input"
           placeholder="Enter username" 
           onChange={(event) => setNewuser({...newuser, username: event.target.value})}/>
       </Form.Group>
@@ -54,6 +55,7 @@ const Signup = () => {
         <Form.Control 
         type="password" 
         placeholder="Password"
+        className="signup-input"
         onChange={(event) => setNewuser({...newuser, password: event.target.value})}/>
       </Form.Group>
       <Button variant="primary" type="submit">

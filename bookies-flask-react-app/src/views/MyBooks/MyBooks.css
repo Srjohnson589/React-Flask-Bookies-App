@@ -1,49 +1,37 @@
-.shelf-h {
-    padding: 5px;
-    font-size: 2.2rem;
+.bookshelves-body{
+    width: 90%;
+    margin: 20px auto;
+    padding-bottom: 40px;
+    border-bottom: 2px;
+    border-radius: 20px;
+}
+
+.bookshelves-body h1 {
+    font-size: 2.5rem;
 }
 
 .shelf-backdrop{
-    width: 90%;
-    margin: 20px auto;
-    border-radius: 2px;
-    border-top: 1px solid black;
+    border: 1px solid black;
+    padding: 40px;
+    background-color: rgb(233, 216, 193);
 }
 
-.shelf-title {
-    text-align: left;
-    font-size: 1.5rem;
-    margin: 0;
-    padding: 8px 0;
+.shelf-backdrop .shelf-title {
+    font-size: 1.8rem;
     padding-left: 40px;
-    border-bottom: 1px solid black;
 }
 
 .shelf {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
-    border-radius: 10px;
-    padding: 25px;
-}
-
-.shelf img {
-    margin: 10px;
 }
 
 .bookcard {
-    width: 160px;
+    width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 5px 10px;
-}
-
-.bookcard p {
-    font-size: 0.9rem;
-    margin: 0;
-    padding: 0;
-    font-family: 'Quicksand', sans-serif;
 }
 
 .list-icons {
@@ -52,18 +40,6 @@
 
 .list-icons:hover {
     cursor: pointer;
-    background-color: rgba(255, 236, 167, 0.911);
+    background-color: rgba(255, 205, 130, 0.911);
     border-radius: 50px;
-}
-
-.title {
-    font-weight: 700;
-}
-
-.change-btns {
-    color: transparent;
-}
-
-.change-btns:hover {
-    color: black;
 }

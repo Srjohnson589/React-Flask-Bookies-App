@@ -1,14 +1,22 @@
 .roulette-container {
+    padding: 20px 40px;
+    padding-bottom: 40px;
     width: 80vw;
-    margin: 0 auto;
-    margin-top: 40px;
+    margin: 40px auto;
+    background-color: rgb(248, 239, 223);
 }
 
 .roulette-container h2 {
-    margin: 15px 0;
+    padding-top: 0;
+}
+
+.roulette-container p {
+    padding: 15px;
+    font-size: 2.2rem;
+    margin: 0;
 }
 
 .cover-img {
-    height: 100px;
+    height: 290px;
     transition: height 0.6s ease-in-out;
 }

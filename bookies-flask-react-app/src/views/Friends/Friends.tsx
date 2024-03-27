@@ -67,45 +67,44 @@ const Friends = () => {
   return (
     <>
         <Nav/>
-        <h3>Following</h3>
-        <div className="users-container">
-            {following && following.map(
-                (otheruser, idx) => 
-                <>
-                <div className="profile-card" key={idx}>
-                    {otheruser.profile_pic ? 
+        <div className="users-body">
+            <h3>Following</h3>
+            <div className="users-container">
+                {following && following.map(
+                    (otheruser, idx) => 
                     <>
-                    <Link to={"/FriendsBooks"} state={{ friend: `${otheruser.username}`}}>
-                        <img className="following profile-pic" src={otheruser.profile_pic} alt="" /> 
+                    <Link to={"/FriendsBooks"} className="text-decoration-none" state={{ friend: `${otheruser.username}`}}>
+                        <div className="profile-card friends-card" key={idx}>
+                            {otheruser.profile_pic ? 
+                                <img className="following profile-pic" src={otheruser.profile_pic} alt="" /> 
+                            : 
+                                <img className="following profile-pic" src="https://cdn2.iconfinder.com/data/icons/hobby-butterscotch-vol-3/512/Reading-512.png" alt="" />}
+                            <p className="user">{otheruser.username}</p>
+                            <Link className="text-decoration-none" to={"/Friends"}><p onClick={()=> {unfollow(otheruser.username)}} className="follow-btn">Unfollow</p>
+                            </Link>
+                        </div>
                     </Link>
                     </>
-                    : 
-                    <>
-                    <Link to={"/FriendsBooks"} state={{ friend: `${otheruser.username}`}}>
-                        <img className="following profile-pic" src="https://cdn2.iconfinder.com/data/icons/hobby-butterscotch-vol-3/512/Reading-512.png" alt="" />
-                    </Link>
-                    </>}
-                    <p className="user">{otheruser.username}</p>
-                    <p onClick={()=> {unfollow(otheruser.username)}} className="follow-btn">Unfollow</p>
-                </div>
-                </>
-            )}
+                )}
+            </div>
         </div>
+        <div className="users-body">
+            <h3 onClick={() => {getUsers(user.username)}}>All users</h3>
+            <div className="users-container">
+                {allUsers && allUsers.map(
+                    (otheruser, idx) => 
+                    <>
+                    <div className="profile-card" key={idx}>
+                        {otheruser.profile_pic ? 
+                        <img className="profile-pic" src={otheruser.profile_pic} alt="" /> 
+                        : <img className="profile-pic" src="https://cdn2.iconfinder.com/data/icons/hobby-butterscotch-vol-3/512/Reading-512.png" alt="" />}
+                        <p className="user">{otheruser.username}</p>
+                        <p onClick={()=> {follow(otheruser.username)}} className="follow-btn">Follow</p>
+                    </div>
+                    </>
+                )}
+            </div>
 
-        <h3 onClick={() => {getUsers(user.username)}}>All users</h3>
-        <div className="users-container">
-            {allUsers && allUsers.map(
-                (otheruser, idx) => 
-                <>
-                <div className="profile-card" key={idx}>
-                    {otheruser.profile_pic ? 
-                    <img className="profile-pic" src={otheruser.profile_pic} alt="" /> 
-                    : <img className="profile-pic" src="https://cdn2.iconfinder.com/data/icons/hobby-butterscotch-vol-3/512/Reading-512.png" alt="" />}
-                    <p className="user">{otheruser.username}</p>
-                    <p onClick={()=> {follow(otheruser.username)}} className="follow-btn">Follow</p>
-                </div>
-                </>
-            )}
         </div>
     </>
   )

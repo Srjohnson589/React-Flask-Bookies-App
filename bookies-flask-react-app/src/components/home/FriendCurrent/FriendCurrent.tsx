@@ -9,19 +9,19 @@ import './FriendCurrent.css';
 const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 5,
+      items: 3,
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 2000, min: 1024 },
       items: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      items: 3,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
+      items: 2,
     },
   };
 
@@ -51,7 +51,7 @@ const responsive = {
     
     return (
     <div className="roulette-container">
-        <h2>Friends Current Reading</h2>
+        <h2 className="friends-title">Friends Current Reading</h2>
         <Carousel responsive={responsive}>
             {friendsCurrent ? friendsCurrent.map((item, idx) => 
             <div className="carousel-img book" key={idx}>
