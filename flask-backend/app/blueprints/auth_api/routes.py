@@ -15,7 +15,7 @@ def signup_api():
     '''
     data = request.get_json()
     queried_user = User.query.filter(User.username == data['username']).first()
-    if not queried_user:
+    if not queried_user and len(data['username'].strip()) > 0:
         new_user = User(username = data['username'], password = data['password'])
         new_user.save()
         return jsonify({

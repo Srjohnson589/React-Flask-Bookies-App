@@ -80,7 +80,8 @@
     color: black;
     margin: 15px 0;
     border-radius: 5px;
-    padding: 8px 6px;
+    width: 120px;
+    padding: 6px 0;
     font-size: 1.1rem;
     border: 1px solid rgba(0, 0, 0, 0.267);
 }
@@ -90,6 +91,7 @@
     font-weight: 500;
     display: inline;
     margin-left: 4px;
+
 }
 
 #add-btn:hover , #read-btn:hover, #current-btn:hover {

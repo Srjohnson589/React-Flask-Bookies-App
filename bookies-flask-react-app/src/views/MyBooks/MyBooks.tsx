@@ -3,6 +3,8 @@ import './MyBooks.css'
 import { UserContext } from '../../context/UserContext';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+
 
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -16,6 +18,10 @@ const MyBooks = () => {
   const [toRead, setToRead] = useState([]);
   const [current, setCurrent] = useState([]);
   const [read, setRead] = useState([]);
+  const [alertText, setAlertText] = useState({
+    'severity': '',
+    'text': ''
+  })
   
   useEffect(() => {
     if (Object.keys(user).length === 0 && user.constructor === Object){

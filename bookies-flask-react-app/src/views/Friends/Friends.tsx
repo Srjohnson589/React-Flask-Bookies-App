@@ -79,7 +79,7 @@ const Friends = () => {
                                 <img className="following profile-pic" src={otheruser.profile_pic} alt="" /> 
                             : 
                                 <img className="following profile-pic" src="https://cdn2.iconfinder.com/data/icons/hobby-butterscotch-vol-3/512/Reading-512.png" alt="" />}
-                            <p className="user">{otheruser.username}</p>
+                            <p className="following-name">{otheruser.username}</p>
                             <Link className="text-decoration-none" to={"/Friends"}><p onClick={()=> {unfollow(otheruser.username)}} className="follow-btn">Unfollow</p>
                             </Link>
                         </div>
@@ -98,7 +98,7 @@ const Friends = () => {
                         {otheruser.profile_pic ? 
                         <img className="profile-pic" src={otheruser.profile_pic} alt="" /> 
                         : <img className="profile-pic" src="https://cdn2.iconfinder.com/data/icons/hobby-butterscotch-vol-3/512/Reading-512.png" alt="" />}
-                        <p className="user">{otheruser.username}</p>
+                        <p className="unfollowing-name">{otheruser.username}</p>
                         <p onClick={()=> {follow(otheruser.username)}} className="follow-btn">Follow</p>
                     </div>
                     </>

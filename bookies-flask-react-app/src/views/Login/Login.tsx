@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { useState, FormEvent, useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { useNavigate, Link } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 
 interface ILoginuser {
   username: string,
@@ -18,6 +19,11 @@ const Login = () => {
   const [loginuser, setLoginuser] = useState<ILoginuser>({
     username: '',
     password: ''
+  })
+
+  const [alertText, setAlertText] = useState({
+    'severity': '',
+    'text': ''
   })
 
   const navigate = useNavigate()
@@ -36,8 +42,10 @@ const Login = () => {
       console.log(localStorage.getItem('user'));
       navigate('/');
     } else {
-      alert('Username or password are incorrect')
-    }
+      setAlertText({
+        'severity': 'error',
+        'text': 'Username or password are incorrect'
+      })}
   }
 
   const handleLogin = async (event: FormEvent) => {
@@ -48,6 +56,8 @@ const Login = () => {
   return (
     <>
     <Nav/>
+    {alertText && <Alert id={alertText.severity} severity={alertText.severity}>{alertText.text}
+    </Alert>}
     <Form className="loginform" onSubmit={handleLogin}>
       <h2>Login</h2>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -68,7 +78,7 @@ const Login = () => {
       <Button variant="primary" type="submit">
         Login
       </Button>
-      <Link to={"/"} className="text-decoration-none back-btn"><h6 className="back">Back</h6></Link>
+      <Link to={"/"} className="text-decoration-none back-btn"><h6 className="back">Go Home</h6></Link>
     </Form>
     </>
   );

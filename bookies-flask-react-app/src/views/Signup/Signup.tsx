@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 
 interface INewuser {
   username: string,
@@ -17,6 +18,11 @@ const Signup = () => {
     password: ''
   })
 
+  const [alertText, setAlertText] = useState({
+    'severity': '',
+    'text': ''
+  })
+
   const navigate = useNavigate();
 
   const createUser = async () => {
@@ -26,19 +32,37 @@ const Signup = () => {
       body: JSON.stringify(newuser)
     })
     const data = await response.json()
-    console.log(data)
+    if (data.status === 'ok'){
+        setAlertText({
+          'severity': 'success',
+          'text': 'New account was created.'
+        })
+    } else {
+        setAlertText({
+          'severity': 'error',
+          'text': 'That username already exists.'
+        })
+    }
   }
 
   const handleSignup = async (event: FormEvent) => {
     event.preventDefault();
     console.log(newuser);
-    await createUser();
-    navigate('/');
+    if ((newuser['username'].trim()).length === 0){
+      setAlertText({
+        'severity': 'error',
+        'text': 'Please enter a username'
+      })
+    } else {
+      await createUser();
+    }
   }
 
   return (
     <>
     <Nav/>
+    {alertText && <Alert id={alertText.severity} severity={alertText.severity}>{alertText.text}
+    </Alert>}
     <Form className="signupform" onSubmit={handleSignup}>
       <h2>Sign Up</h2>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -59,9 +83,9 @@ const Signup = () => {
         onChange={(event) => setNewuser({...newuser, password: event.target.value})}/>
       </Form.Group>
       <Button variant="primary" type="submit">
-        Sign Up
+        Create my account
       </Button>
-      <Link to={"/"} className="text-decoration-none back-btn"><h6 className="back">Back</h6></Link>
+      <Link to={"/"} className="text-decoration-none back-btn"><h6 className="back">Go Home</h6></Link>
     </Form>
     </>
   );

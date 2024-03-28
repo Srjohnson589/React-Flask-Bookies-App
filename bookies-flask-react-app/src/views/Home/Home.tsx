@@ -5,7 +5,7 @@ import Roulette from '/src/components/home/Roulette/Roulette.tsx'
 import './Home.css'
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '/src/context/UserContext.tsx';
-import { getListItemAvatarUtilityClass } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
 const Home = () => {
     
@@ -75,9 +75,6 @@ const Home = () => {
           <img onClick={()=>{setChatopen(!chatopen)}} className="chatbot-icon" src="https://i.pinimg.com/originals/ff/fb/48/fffb481f28a395fb8ad93e7ecd8f2ec7.png" ></img>
           {chatopen && 
            <div className="chat-body">
-              <div className="convoline">
-                <p className="assistant">I am your AI assistant! How can I help you today?</p>
-              </div>
               {chatrecord.map((item, index) => (
                 <div className="convoline">
                   <p className={item.role} key={index}>{item.content}</p>

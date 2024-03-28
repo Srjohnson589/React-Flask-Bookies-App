@@ -78,14 +78,17 @@ const Book = () => {
       const data = await response.json();
       console.log(data);
       getReviews(book.title);
+      setReviewData({
+        rating: '0',
+        text: ''
+      })
     }
 
   return (
     <>
     <Nav/>
-    <div>
+    <div className="book-body">
         {book && 
-        <>
         <div className="singlebook-container">
           <div className="img-title">
             <img className="mainbook-img" src={book.thumbnail} alt="" />
@@ -94,22 +97,22 @@ const Book = () => {
               <h2>{book.author}</h2>
               <p>{book.publisher} {book.published}</p>
               {(book.googlerating > 0) && <Rating name="half-rating-read" value={book.googlerating} precision={0.5} readOnly />}
-              <a href={`https://amazon.com/s?k=${book.title}+${book.author}`} target="_blank">Buy on Amazon</a>
+              <a href={`https://amazon.com/s?k=${book.title}+${book.author}`} target="_blank" className="amazon-btn">View on <img className="amazon-logo" src="https://cdn.freebiesupply.com/images/large/2x/amazon-logo-transparent.png"></img></a>
+              <a href={`https://www.goodreads.com/search?q=${book.title}+${book.author}`} className="amazon-btn">View on <img className="goodreads-logo" src="https://cdn.freebiesupply.com/images/large/2x/goodreads-logo-black-transparent.png" alt="" /></a>
             </div>
           </div>
           {book.description && <p>{book.description}</p>}
         </div>
-        </>
         }
+        <h3 className="friends-review-title">Friends Reviews</h3>
+        {allReviews && allReviews.map((review, idx) => 
+          <div className="review-card" key={idx}>
+            <p>{review.username}</p>
+            <Rating name="read-only" value={review.rating} readOnly />
+            <p>{review.text}</p>
+          </div>
+        )}
     </div>
-    <h3>Friends Reviews</h3>
-    {allReviews && allReviews.map((review, idx) => 
-      <div className="review-card" key={idx}>
-        <p>{review.username}</p>
-        <Rating name="read-only" value={review.rating} readOnly />
-        <p>{review.text}</p>
-      </div>
-    )}
     <div className="review-form">
         <p className="review-header">Write a review!</p>
         <div className="rating-form">

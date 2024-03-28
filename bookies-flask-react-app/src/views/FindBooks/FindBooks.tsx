@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import './FindBooks.css'
 import Nav from '/src/components/Nav/Nav.tsx';
 import { UserContext } from '../../context/UserContext';
+import Alert from '@mui/material/Alert';
 
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CheckIcon from '@mui/icons-material/Check';
@@ -16,6 +17,10 @@ const FindBooks = () => {
     const [searchBook, setSearchBook] = useState('');
     const [returnResults, setReturnResults] = useState([]);
     const {user, setUser} = useContext(UserContext);
+    const [alertText, setAlertText] = useState({
+      'severity': '',
+      'text': ''
+    })
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('user');
@@ -26,6 +31,10 @@ const FindBooks = () => {
       }, []);
 
   const searchResults = async (searchStr: string) => {
+    setAlertText({
+      'severity': '',
+      'text': ''
+    })
     const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}`);
     if (response.ok) {
         const data = await response.json();
@@ -77,9 +86,18 @@ const FindBooks = () => {
       body: JSON.stringify(returnResults[index])
     })
     const data = await response.json()
-    console.log(data)
-    alert('Book was saved to "to read" shelf')
-  }
+    if (data.status === 'ok'){
+      setAlertText({
+        'severity': 'success',
+        'text': 'Book was added to your "To Read" Shelf.'
+      })
+    } else {
+        setAlertText({
+          'severity': 'error',
+          'text': 'Something went wrong and book was not saved'
+        })
+    }
+    }
 
   const addCurrent = async (index: number) => {
     const response = await fetch('http://127.0.0.1:5000/books_api/add_current', {
@@ -89,7 +107,17 @@ const FindBooks = () => {
     })
     const data = await response.json()
     console.log(data)
-    alert('Book was saved to "current" shelf')
+    if (data.status === 'ok'){
+      setAlertText({
+        'severity': 'success',
+        'text': 'Book was added to your "Current" Shelf.'
+      })
+    } else {
+        setAlertText({
+          'severity': 'error',
+          'text': 'Something went wrong and book was not saved'
+        })
+    }
   }
 
   const addRead = async (index: number) => {
@@ -100,12 +128,24 @@ const FindBooks = () => {
     })
     const data = await response.json()
     console.log(data)
-    alert('Book was saved to "read" shelf')
+    if (data.status === 'ok'){
+      setAlertText({
+        'severity': 'success',
+        'text': 'Book was added to your "Read" Shelf.'
+      })
+    } else {
+        setAlertText({
+          'severity': 'error',
+          'text': 'Something went wrong and book was not saved'
+        })
+    }
   }
 
   return (
     <>
         <Nav/>
+        {alertText && <Alert id={alertText.severity} severity={alertText.severity}>{alertText.text}
+        </Alert>}
         <div className="book-searchbar">
             <input 
             type="text" 

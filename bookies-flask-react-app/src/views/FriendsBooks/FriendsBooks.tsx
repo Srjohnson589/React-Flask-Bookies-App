@@ -4,6 +4,7 @@ import { UserContext } from '../../context/UserContext';
 import { useContext, useEffect, useState } from 'react';
 import {useLocation} from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 
 import CheckIcon from '@mui/icons-material/Check';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -18,6 +19,10 @@ const FriendsBooks = () => {
   const [toRead, setToRead] = useState([]);
   const [current, setCurrent] = useState([]);
   const [read, setRead] = useState([]);
+  const [alertText, setAlertText] = useState({
+    'severity': '',
+    'text': ''
+  })
   
   useEffect(() => {
     if (Object.keys(user).length === 0 && user.constructor === Object){
@@ -54,8 +59,17 @@ const FriendsBooks = () => {
     })
     const data = await response.json();
     console.log(data);
-    alert('Added to your current shelf')
-  }
+    if (data.status === 'ok'){
+      setAlertText({
+        'severity': 'success',
+        'text': 'Book was added to your Current shelf.'
+      })
+  } else {
+      setAlertText({
+        'severity': 'error',
+        'text': data.message
+      })
+  }}
 
   const makeRead = async (t) => {
     const title = t;
@@ -68,8 +82,17 @@ const FriendsBooks = () => {
     })
     const data = await response.json();
     console.log(data);
-    alert('Added to your Already Read shelf')
-  }
+    if (data.status === 'ok'){
+      setAlertText({
+        'severity': 'success',
+        'text': 'Book was added to your Read shelf.'
+      })
+    } else {
+      setAlertText({
+        'severity': 'error',
+        'text': data.message
+      })
+  }}
 
   const makeToRead = async (t) => {
     const title = t;
@@ -82,12 +105,23 @@ const FriendsBooks = () => {
     })
     const data = await response.json();
     console.log(data);
-    alert('Added to your To Read shelf')
-  }
+    if (data.status === 'ok'){
+      setAlertText({
+        'severity': 'success',
+        'text': 'Book was added to your To Read shelf.'
+      })
+    } else {
+      setAlertText({
+        'severity': 'error',
+        'text': data.message
+      })
+  }}
 
   return (
     <>
         <Nav/>
+        {alertText && <Alert id={alertText.severity} severity={alertText.severity}>{alertText.text}
+        </Alert>}
         <h1 className="shelf-h">{friend}'s Bookshelves</h1>
         <div className="shelf-backdrop">
           <p className="shelf-title">To Read</p>
