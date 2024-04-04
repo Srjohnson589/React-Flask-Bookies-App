@@ -27,12 +27,31 @@
 }
 
 .bookcard {
-    width: 180px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 5px 10px;
+    margin: 10px;
+    border-radius: 4px;
 }
+
+.shelf-covers {
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 5px;
+    align-items: center;
+}
+
+.cover {
+    margin: 0;
+    padding: 0;
+    height: 200px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.534);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
 
 .list-icons {
     padding: 2px;

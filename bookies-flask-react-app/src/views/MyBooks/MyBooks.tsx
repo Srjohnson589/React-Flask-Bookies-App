@@ -145,9 +145,11 @@ const MyBooks = () => {
                 {toRead && toRead.map((book, idx) => 
                 <>
                   <div key={idx} className="bookcard">
-                    <Link to={"/Book"} state={{ title: `${book.title}`}}>
-                      <img className="shelf-covers" src={book.thumbnail}></img>
-                    </Link>
+                    <div className="shelf-covers">
+                      <Link to={"/Book"} state={{ title: `${book.title}`}}>
+                        <img className="cover" src={book.thumbnail}></img>
+                      </Link>
+                    </div>
                     <div>
                       <Tooltip title="Finish"><CheckIcon className="list-icons" onClick={() => makeRead(book.title)} /></Tooltip>
                       <Tooltip title="Current"><StarBorderIcon className="list-icons" onClick={() => makeCurrent(book.title)}/></Tooltip>
@@ -164,9 +166,11 @@ const MyBooks = () => {
                 {current && current.map((book, idx) => 
                 <>
                   <div key={idx} className="bookcard">
-                    <Link to={"/Book"} state={{ title: `${book.title}`}}>
-                      <img className="shelf-covers" src={book.thumbnail}></img>
-                    </Link>
+                    <div className="shelf-covers">
+                      <Link to={"/Book"} state={{ title: `${book.title}`}}>
+                        <img className="cover" src={book.thumbnail}></img>
+                      </Link>
+                    </div>
                     <div>
                       <Tooltip title="Finish"><CheckIcon className="list-icons" onClick={() => makeRead(book.title)}/></Tooltip>
                       <Tooltip title="To Read"><BookmarkBorderIcon className="list-icons" onClick={() => makeToRead(book.title)}/></Tooltip>
@@ -183,9 +187,11 @@ const MyBooks = () => {
                 {read && read.map((book, idx) => 
                 <>
                   <div key={idx} className="bookcard">
-                    <Link to={"/Book"} state={{ title: `${book.title}`}}>
-                      <img className="shelf-covers" src={book.thumbnail}></img>
-                    </Link>
+                    <div className="shelf-covers">
+                      <Link to={"/Book"} state={{ title: `${book.title}`}}>
+                        <img className="cover" src={book.thumbnail}></img>
+                      </Link>
+                    </div>
                     <div>
                       <Tooltip title="To Read"><BookmarkBorderIcon className="list-icons" onClick={() => makeToRead(book.title)}/></Tooltip>
                       <Tooltip title="Current"><StarBorderIcon className="list-icons" onClick={() => makeCurrent(book.title)} /></Tooltip>
