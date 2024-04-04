@@ -40,7 +40,7 @@ const responsive = {
 
 
     const getCurrents = async (username) => {
-      const response = await fetch(`http://127.0.0.1:5000/auth_api/friends_current/${username}`);
+      const response = await fetch(`https://react-flask-bookies-app.onrender.com/auth_api/friends_current/${username}`);
       if (response.ok) {
           const data = await response.json();
           console.log(data);

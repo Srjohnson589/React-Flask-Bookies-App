@@ -18,7 +18,7 @@ const Profile = () => {
 
 
     const save_picture = async () => {
-        const response = await fetch('http://127.0.0.1:5000/auth_api/save_picture', {
+        const response = await fetch('https://react-flask-bookies-app.onrender.com/auth_api/save_picture', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

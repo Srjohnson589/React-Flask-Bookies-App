@@ -35,7 +35,7 @@ const MyBooks = () => {
   useEffect(() => {getShelves(user.username)}, []);
   
   const getShelves = async (username) => {
-    const response = await fetch('http://127.0.0.1:5000/books_api/show_shelves', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/show_shelves', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'username': username})
@@ -51,7 +51,7 @@ const MyBooks = () => {
     console.log(idx.idx);
     const title = toRead[idx.idx].title;
     console.log(title);
-    const response = await fetch('http://127.0.0.1:5000/books_api/remove_to_read', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/remove_to_read', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'username': user.username,
@@ -65,7 +65,7 @@ const MyBooks = () => {
   const makeCurrent = async (t) => {
     const title = t;
     console.log(title);
-    const response = await fetch('http://127.0.0.1:5000/books_api/make_current', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/make_current', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'username': user.username,
@@ -79,7 +79,7 @@ const MyBooks = () => {
   const makeRead = async (t) => {
     const title = t;
     console.log(title);
-    const response = await fetch('http://127.0.0.1:5000/books_api/make_read', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/make_read', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'username': user.username,
@@ -93,7 +93,7 @@ const MyBooks = () => {
   const makeToRead = async (t) => {
     const title = t;
     console.log(title);
-    const response = await fetch('http://127.0.0.1:5000/books_api/make_to_read', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/make_to_read', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'username': user.username,
@@ -108,7 +108,7 @@ const MyBooks = () => {
     console.log(idx.idx);
     const title = current[idx.idx].title;
     console.log(title);
-    const response = await fetch('http://127.0.0.1:5000/books_api/remove_current', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/remove_current', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'username': user.username,
@@ -123,7 +123,7 @@ const MyBooks = () => {
     console.log(idx.idx);
     const title = read[idx.idx].title;
     console.log(title);
-    const response = await fetch('http://127.0.0.1:5000/books_api/remove_read', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/remove_read', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'username': user.username,

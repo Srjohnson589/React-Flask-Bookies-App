@@ -41,7 +41,7 @@ const Book = () => {
     const getBook = async (t) => {
         const title = t;
         console.log(title);
-        const response = await fetch(`http://127.0.0.1:5000/books_api/getBook/${title}`, {
+        const response = await fetch(`https://react-flask-bookies-app.onrender.com/books_api/getBook/${title}`, {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
         })
@@ -53,7 +53,7 @@ const Book = () => {
     const getReviews = async (t) => {
       const title = t;
       console.log(title);
-      const response = await fetch(`http://127.0.0.1:5000/reviews_api/get_reviews/${title}`, {
+      const response = await fetch(`https://react-flask-bookies-app.onrender.com/reviews_api/get_reviews/${title}`, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
       })
@@ -65,7 +65,7 @@ const Book = () => {
     const postReview = async(r) => {
       const review = r;
       console.log(review);
-      const response = await fetch("http://127.0.0.1:5000/reviews_api/add_review", {
+      const response = await fetch("https://react-flask-bookies-app.onrender.com/reviews_api/add_review", {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({

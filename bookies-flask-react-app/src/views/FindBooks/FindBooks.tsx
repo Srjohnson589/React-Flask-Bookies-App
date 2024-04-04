@@ -80,7 +80,7 @@ const FindBooks = () => {
   };
 
   const addToRead = async (index: number) => {
-    const response = await fetch('http://127.0.0.1:5000/books_api/add_to_read', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/add_to_read', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(returnResults[index])
@@ -100,7 +100,7 @@ const FindBooks = () => {
     }
 
   const addCurrent = async (index: number) => {
-    const response = await fetch('http://127.0.0.1:5000/books_api/add_current', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/add_current', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(returnResults[index])
@@ -121,7 +121,7 @@ const FindBooks = () => {
   }
 
   const addRead = async (index: number) => {
-    const response = await fetch('http://127.0.0.1:5000/books_api/add_read', {
+    const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/add_read', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(returnResults[index])

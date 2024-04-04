@@ -26,7 +26,7 @@ const Friends = () => {
         }}, [allUsers])
 
     const getUsers = async (u) => {
-        const response = await fetch(`http://127.0.0.1:5000/auth_api/all_users/${u}`, {
+        const response = await fetch(`https://react-flask-bookies-app.onrender.com/auth_api/all_users/${u}`, {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
         })
