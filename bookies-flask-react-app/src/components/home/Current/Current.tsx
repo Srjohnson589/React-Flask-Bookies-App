@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '/src/context/UserContext.tsx';
+import { UserContext } from '../../../context/UserContext.tsx';
 import './Current.css'
 
 const Current = () => {
@@ -14,7 +14,7 @@ const Current = () => {
         getmyCurrents(user.username)
       }}, [currentran]);
 
-    const getmyCurrents = async (username) => {
+    const getmyCurrents = async (username:string) => {
         const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/show_shelves', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},

@@ -27,7 +27,7 @@ const responsive = {
   
   const Roulette = () => {
     
-    const [topFive, setTopFive] = useState([]);
+    const [topFive, setTopFive] = useState<string[]>([]);
 
     useEffect(() => {
       if (topFive.length === 0){
@@ -40,7 +40,7 @@ const responsive = {
           const data = await response.json();
           console.log(data)
           let i = 0;
-          let results:string[] = [];
+          let results: string[] = [];
           while (results.length < 5) {
               try{
                   results.push(data.results.books[i].book_image);

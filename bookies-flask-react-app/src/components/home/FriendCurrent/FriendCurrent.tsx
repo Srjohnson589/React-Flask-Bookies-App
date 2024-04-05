@@ -2,7 +2,7 @@
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '/src/context/UserContext.tsx';
+import { UserContext } from '../../../context/UserContext.tsx';
 
 import './FriendCurrent.css';
 
@@ -25,21 +25,24 @@ const responsive = {
     },
   };
 
-  
+  interface Friend {
+    thumbnail: string;
+    username: string;
+  }
+
   const FriendCurrent = () => {
     
-    const [friendsCurrent, setFriendsCurrent] = useState([]);
+    const [friendsCurrent, setFriendsCurrent] = useState<Friend[]>([]);
     const [nofriends, setNofriends] = useState(false)
     const [wasran, setWasran] = useState(false)
-    const {user, setUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
     useEffect(() => {
       if (wasran == false){
         getCurrents(user.username);
         }}, [wasran]);
 
-
-    const getCurrents = async (username) => {
+    const getCurrents = async (username:string) => {
       const response = await fetch(`https://react-flask-bookies-app.onrender.com/auth_api/friends_current/${username}`);
       if (response.ok) {
           const data = await response.json();

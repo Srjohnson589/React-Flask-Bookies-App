@@ -1,11 +1,10 @@
-import Nav from '/src/components/Nav/Nav.tsx';
-import FriendCurrent from '/src/components/home/FriendCurrent/FriendCurrent.tsx';
-import Current from '/src/components/home/Current/Current.tsx';
-import Roulette from '/src/components/home/Roulette/Roulette.tsx'
+import Nav from '../../components/Nav/Nav.tsx';
+import FriendCurrent from '../../components/home/FriendCurrent/FriendCurrent.tsx';
+import Current from '../../components/home/Current/Current.tsx';
+import Roulette from '../../components/home/Roulette/Roulette.tsx'
 import './Home.css'
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '/src/context/UserContext.tsx';
-import Alert from '@mui/material/Alert';
+import { UserContext } from '../../context/UserContext.tsx';
 
 const Home = () => {
     
@@ -19,7 +18,7 @@ const Home = () => {
         const loggedInUser = localStorage.getItem('user');
         if (loggedInUser) {
           console.log(loggedInUser);
-          setUser({'username': loggedInUser})
+          setUser({...user, 'username': loggedInUser})
         }
       }, []);
 

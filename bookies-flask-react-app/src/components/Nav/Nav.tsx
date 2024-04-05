@@ -1,5 +1,5 @@
 import './Nav.css'
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
@@ -9,7 +9,7 @@ const Nav = () => {
     const {user, setUser} = useContext(UserContext);
 
     const logout = () => {
-        setUser({username: ''});
+        setUser({...user, username: ''});
         localStorage.clear();
     }
 

@@ -1,27 +1,52 @@
-import Nav from '/src/components/Nav/Nav.tsx';
+import Nav from '../../components/Nav/Nav.tsx';
 import './Book.css'
 import { Rating, TextField } from '@mui/material';
 import {useLocation} from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 
+interface B {
+  title: string;
+  author: string;
+  thumbnail: string;
+  publisher: string;
+  published: string;
+  googlerating: number;
+  description: string;
+}
+
+interface Review {
+  rating: number;
+  text: string;
+}
+
+interface AllReviews {
+  username: string;
+  rating: number;
+  text: string;
+}
+
 const Book = () => {
     const location = useLocation();
     const {title} = location.state;
     const {user, setUser} = useContext(UserContext);
-    const [book, setBook] = useState({});
-    const [reviewData, setReviewData] = useState({
-      rating: '0',
-      text: ''
-    });
-    const [allReviews, setAllReviews] = useState([]);
+    const [book, setBook] = useState<B>({title: '',
+                                        author: '',
+                                        thumbnail: '',
+                                        publisher: '',
+                                        published: '',
+                                        googlerating: 0,
+                                        description: ''});
+    const [reviewData, setReviewData] = useState<Review>({rating: 0,
+                                                          text: ''});
+    const [allReviews, setAllReviews] = useState<AllReviews[]>([]);
 
     useEffect(() => {
       if (user.username === ''){
         const loggedInUser = localStorage.getItem('user');
         if (loggedInUser) {
           console.log(loggedInUser);
-          setUser({'username': loggedInUser})
+          setUser({...user, 'username': loggedInUser})
         }
       }}, [user]);
 
@@ -38,7 +63,7 @@ const Book = () => {
     return () => clearTimeout(timeout); 
   }, [allReviews]);
 
-    const getBook = async (t) => {
+    const getBook = async (t:string) => {
         const title = t;
         console.log(title);
         const response = await fetch(`https://react-flask-bookies-app.onrender.com/books_api/getBook/${title}`, {
@@ -47,10 +72,16 @@ const Book = () => {
         })
         const data = await response.json();
         console.log(data);
-        setBook(data);
+        setBook({title: data.title,
+                  author: data.author,
+                  thumbnail: data.thumbnail,
+                  publisher: data.publisher,
+                  published: data.published,
+                  googlerating: data.googlerating,
+                  description: data.description});
       }
 
-    const getReviews = async (t) => {
+    const getReviews = async (t:string) => {
       const title = t;
       console.log(title);
       const response = await fetch(`https://react-flask-bookies-app.onrender.com/reviews_api/get_reviews/${title}`, {
@@ -62,7 +93,7 @@ const Book = () => {
       setAllReviews(data.reviews)
     }
 
-    const postReview = async(r) => {
+    const postReview = async(r:Review) => {
       const review = r;
       console.log(review);
       const response = await fetch("https://react-flask-bookies-app.onrender.com/reviews_api/add_review", {
@@ -79,10 +110,17 @@ const Book = () => {
       console.log(data);
       getReviews(book.title);
       setReviewData({
-        rating: '0',
+        rating: 0,
         text: ''
       })
     }
+
+    const handleRatingChange = (event: React.SyntheticEvent<Element, Event>, newValue: number | null) => {
+      // newValue is the rating value provided by the Rating component
+      if (newValue) {
+        setReviewData({...reviewData, rating: newValue})
+      }
+    };
 
   return (
     <>
@@ -120,9 +158,7 @@ const Book = () => {
             name="half-rating"
             precision={0.5}
             value={reviewData.rating}
-            onChange={(event) => {
-              setReviewData({...reviewData, rating: event.target.value});
-            }}
+            onChange={handleRatingChange}
           />
         </div>
         <TextField           
@@ -131,8 +167,7 @@ const Book = () => {
             label="My comments"
             placeholder="Text here"
             value={reviewData.text}
-            onChange={(event) => {
-              setReviewData({...reviewData, text: event.target.value});}}
+            onChange={(event) => {setReviewData({...reviewData, text: event.target.value})}}
             multiline />
         <p className="review-btn" onClick={()=>{postReview(reviewData)}}>Submit</p>
     </div>

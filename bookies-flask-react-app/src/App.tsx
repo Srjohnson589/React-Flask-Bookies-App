@@ -1,13 +1,13 @@
-import Home from '/src/views/Home/Home.tsx'
-import Signup from '/src/views/Signup/Signup.tsx'
-import Login from '/src/views/Login/Login.tsx'
-import FindBooks from '/src/views/FindBooks/FindBooks.tsx'
-import MyBooks from '/src/views/MyBooks/MyBooks.tsx'
-import Book from '/src/views/Book/Book.tsx'
-import Friends from '/src/views/Friends/Friends.tsx'
-import Profile from '/src/views/Profile/Profile.tsx'
-import FriendsBooks from '/src/views/FriendsBooks/FriendsBooks.tsx'
-import {Route, RouterProvider, Routes} from 'react-router-dom';
+import Home from './views/Home/Home.tsx'
+import Signup from './views/Signup/Signup.tsx'
+import Login from './views/Login/Login.tsx'
+import FindBooks from './views/FindBooks/FindBooks.tsx'
+import MyBooks from './views/MyBooks/MyBooks.tsx'
+import Book from './views/Book/Book.tsx'
+import Friends from './views/Friends/Friends.tsx'
+import Profile from './views/Profile/Profile.tsx'
+import FriendsBooks from './views/FriendsBooks/FriendsBooks.tsx'
+import {Route, Routes} from 'react-router-dom';
 import './App.css'
 
 function App() {

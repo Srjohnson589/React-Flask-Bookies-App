@@ -1,4 +1,4 @@
-import Nav from '/src/components/Nav/Nav.tsx'
+import Nav from '../../components/Nav/Nav.tsx'
 import './Login.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -37,7 +37,7 @@ const Login = () => {
     const data = await response.json()
     console.log(data)
     if (data.status === 'ok') {
-      setUser({username: loginuser.username});
+      setUser({...user, username: loginuser.username});
       localStorage.setItem('user', loginuser.username);
       console.log(localStorage.getItem('user'));
       navigate('/');
