@@ -1,4 +1,4 @@
-import Nav from '/src/components/Nav/Nav.tsx'
+import Nav from '../../components/Nav/Nav.tsx'
 import './FriendsBooks.css'
 import { UserContext } from '../../context/UserContext';
 import { useContext, useEffect, useState } from 'react';
@@ -11,14 +11,19 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { Tooltip } from '@mui/material';
 
+interface MyBook {
+  title: string;
+  thumbnail: string;
+}
+
 const FriendsBooks = () => {
 
   const {user, setUser} = useContext(UserContext);
   const location = useLocation();
   const { friend } = location.state;
-  const [toRead, setToRead] = useState([]);
-  const [current, setCurrent] = useState([]);
-  const [read, setRead] = useState([]);
+  const [toRead, setToRead] = useState<MyBook[]>([]);
+  const [current, setCurrent] = useState<MyBook[]>([]);
+  const [read, setRead] = useState<MyBook[]>([]);
   const [alertText, setAlertText] = useState({
     'severity': '',
     'text': ''
@@ -35,7 +40,7 @@ const FriendsBooks = () => {
     
   useEffect(() => {getShelves(friend)}, []);
   
-  const getShelves = async (username) => {
+  const getShelves = async (username:string) => {
     const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/show_shelves', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -48,7 +53,7 @@ const FriendsBooks = () => {
     setRead(data.read_shelf);
   }
 
-  const makeCurrent = async (t) => {
+  const makeCurrent = async (t:string) => {
     const title = t;
     console.log(title);
     const response = await fetch('http://127.0.0.1:5000/books_api/add_friends_current', {
@@ -71,7 +76,7 @@ const FriendsBooks = () => {
       })
   }}
 
-  const makeRead = async (t) => {
+  const makeRead = async (t:string) => {
     const title = t;
     console.log(title);
     const response = await fetch('http://127.0.0.1:5000/books_api/add_friends_read', {
@@ -94,7 +99,7 @@ const FriendsBooks = () => {
       })
   }}
 
-  const makeToRead = async (t) => {
+  const makeToRead = async (t:string) => {
     const title = t;
     console.log(title);
     const response = await fetch('http://127.0.0.1:5000/books_api/add_friends_to_read', {
@@ -120,7 +125,7 @@ const FriendsBooks = () => {
   return (
     <>
         <Nav/>
-        {alertText && <Alert id={alertText.severity} severity={alertText.severity}>{alertText.text}
+        {alertText && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
         </Alert>}
         <h1 className="shelf-h">{friend}'s Bookshelves</h1>
         <div className="shelf-backdrop">

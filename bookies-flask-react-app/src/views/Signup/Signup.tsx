@@ -1,9 +1,9 @@
-import Nav from '/src/components/Nav/Nav.tsx'
+import Nav from '../../components/Nav/Nav.tsx'
 import './Signup.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState, FormEvent } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 
 interface INewuser {
@@ -22,8 +22,6 @@ const Signup = () => {
     'severity': '',
     'text': ''
   })
-
-  const navigate = useNavigate();
 
   const createUser = async () => {
     const response = await fetch('https://react-flask-bookies-app.onrender.com/auth_api/signup', {
@@ -61,7 +59,7 @@ const Signup = () => {
   return (
     <>
     <Nav/>
-    {alertText && <Alert id={alertText.severity} severity={alertText.severity}>{alertText.text}
+    {alertText && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
     </Alert>}
     <Form className="signupform" onSubmit={handleSignup}>
       <h2>Sign Up</h2>

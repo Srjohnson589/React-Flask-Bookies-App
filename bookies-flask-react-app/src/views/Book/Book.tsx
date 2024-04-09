@@ -117,7 +117,7 @@ const Book = () => {
 
     const handleRatingChange = (event: React.SyntheticEvent<Element, Event>, newValue: number | null) => {
       // newValue is the rating value provided by the Rating component
-      if (newValue) {
+      if (event && newValue) {
         setReviewData({...reviewData, rating: newValue})
       }
     };

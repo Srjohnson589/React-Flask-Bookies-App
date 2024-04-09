@@ -1,7 +1,7 @@
-import Nav from "/src/components/Nav/Nav.tsx";
+import Nav from "../../components/Nav/Nav.tsx";
 import './Profile.css'
 import { useContext , useEffect, useState} from 'react';
-import UserContextProvider, { UserContext } from '../../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
 const Profile = () => {
     const {user, setUser} = useContext(UserContext);

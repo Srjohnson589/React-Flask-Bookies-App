@@ -3,9 +3,15 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../../context/UserContext.tsx';
 import './Current.css'
 
+interface B {
+  title: string;
+  author: string;
+  thumbnail: string;
+}
+
 const Current = () => {
 
-    const [myCurrent, setMyCurrent] = useState([]);
+    const [myCurrent, setMyCurrent] = useState<B[]>([]);
     const { user } = useContext(UserContext);
     const [currentran, setCurrentran] = useState(false);
 
@@ -21,8 +27,12 @@ const Current = () => {
           body: JSON.stringify({'username': username})
         })
         const data = await response.json();
+        console.log("********************************* line 31")
         console.log(data)
-        setMyCurrent(data.current_shelf);
+        const currentShelf: B[] = data.current_shelf;
+        for (let item of currentShelf) {
+          setMyCurrent([...myCurrent, item]);
+        }
         setCurrentran(true);
     };
 

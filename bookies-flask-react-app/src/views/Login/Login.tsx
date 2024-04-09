@@ -56,7 +56,7 @@ const Login = () => {
   return (
     <>
     <Nav/>
-    {alertText && <Alert id={alertText.severity} severity={alertText.severity}>{alertText.text}
+    {alertText && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
     </Alert>}
     <Form className="loginform" onSubmit={handleLogin}>
       <h2>Login</h2>

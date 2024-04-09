@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import './FindBooks.css'
-import Nav from '/src/components/Nav/Nav.tsx';
+import Nav from '../../components/Nav/Nav.tsx';
 import { UserContext } from '../../context/UserContext';
 import Alert from '@mui/material/Alert';
 
@@ -11,14 +11,29 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import {MDBCard,MDBCardTitle,MDBCardText,MDBCardBody,MDBCardImage,MDBRow,MDBCol} from "mdb-react-ui-kit";
 import { Rating } from '@mui/material';
 
+interface NewBook {
+  username: string;
+  title: string;
+  author: string;
+  thumbnail: string;
+  publisher: string;
+  published: string;
+  googlerating: number;
+  description: string;
+}
+
+interface Alert {
+  severity: 'error' | 'info' | 'success' | 'warning';
+  text: string;
+}
 
 const FindBooks = () => {
 
     const [searchBook, setSearchBook] = useState('');
-    const [returnResults, setReturnResults] = useState([]);
+    const [returnResults, setReturnResults] = useState<NewBook[]>([]);
     const {user, setUser} = useContext(UserContext);
     const [alertText, setAlertText] = useState({
-      'severity': '',
+      'severity': 'success',
       'text': ''
     })
 
@@ -26,7 +41,7 @@ const FindBooks = () => {
         const loggedInUser = localStorage.getItem('user');
         if (loggedInUser) {
           console.log(loggedInUser);
-          setUser({'username': loggedInUser})
+          setUser({...user, 'username': loggedInUser})
         }
       }, []);
 
@@ -41,15 +56,18 @@ const FindBooks = () => {
         console.log(data)
         setReturnResults([]);
         let i = 0;
-        let results = [];
+        let results:NewBook[] = [];
         while (data.items[i]) {
             try{
-                let info_dict = {
+                let info_dict:NewBook = {
                     username: user.username,
                     title: data.items[i].volumeInfo.title,
                     thumbnail: data.items[i].volumeInfo.imageLinks.thumbnail,
                     description: data.items[i].volumeInfo.description,
-                    published: data.items[i].volumeInfo.publishedDate.slice(0,4)
+                    published: data.items[i].volumeInfo.publishedDate.slice(0,4),
+                    author: '',
+                    publisher: '',
+                    googlerating: 0
                 };
                 try {
                     info_dict.author = data.items[i].volumeInfo.authors[0];
@@ -144,7 +162,7 @@ const FindBooks = () => {
   return (
     <>
         <Nav/>
-        {alertText && <Alert id={alertText.severity} severity={alertText.severity}>{alertText.text}
+        {alertText && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
         </Alert>}
         <div className="book-searchbar">
             <input 

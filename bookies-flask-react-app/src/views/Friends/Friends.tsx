@@ -1,15 +1,20 @@
-import Nav from '/src/components/Nav/Nav.tsx';
+import Nav from '../../components/Nav/Nav.tsx';
 import './Friends.css';
 import { useContext , useEffect, useState} from 'react';
 import { Link } from 'react-router-dom'
-import UserContextProvider, { UserContext } from '../../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
+
+interface OtherUser {
+    username: string;
+    profile_pic: string;
+}
 
 const Friends = () => {
 
     const {user, setUser} = useContext(UserContext);
-    const [allUsers, setAllUsers] = useState([]);
-    const [following, setFollowing] = useState([]);
+    const [allUsers, setAllUsers] = useState<OtherUser[]>([]);
+    const [following, setFollowing] = useState<OtherUser[]>([]);
 
     useEffect(() => {
         if (user.username === ''){
@@ -25,7 +30,7 @@ const Friends = () => {
             getUsers(user.username)
         }}, [allUsers])
 
-    const getUsers = async (u) => {
+    const getUsers = async (u:string) => {
         const response = await fetch(`https://react-flask-bookies-app.onrender.com/auth_api/all_users/${u}`, {
           method: 'GET',
           headers: {'Content-Type': 'application/json'},
@@ -36,7 +41,7 @@ const Friends = () => {
         setFollowing(data.following);
     }
 
-    const follow = async (tofollow) => {
+    const follow = async (tofollow:string) => {
         const response = await fetch("http://127.0.0.1:5000/auth_api/follow", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -50,7 +55,7 @@ const Friends = () => {
         getUsers(user.username);
     }
 
-    const unfollow = async (u) => {
+    const unfollow = async (u:string) => {
         const response = await fetch(`http://127.0.0.1:5000/auth_api/unfollow`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

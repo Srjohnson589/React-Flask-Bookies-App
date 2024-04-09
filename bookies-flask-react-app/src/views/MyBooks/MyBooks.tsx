@@ -1,9 +1,8 @@
-import Nav from '/src/components/Nav/Nav.tsx'
+import Nav from '../../components/Nav/Nav.tsx'
 import './MyBooks.css'
 import { UserContext } from '../../context/UserContext';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Alert from '@mui/material/Alert';
 
 
 import CheckIcon from '@mui/icons-material/Check';
@@ -12,29 +11,31 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { Tooltip } from '@mui/material';
 
+interface MyBook {
+  title: string;
+  thumbnail: string;
+}
+
 const MyBooks = () => {
 
   const {user, setUser} = useContext(UserContext);
-  const [toRead, setToRead] = useState([]);
-  const [current, setCurrent] = useState([]);
-  const [read, setRead] = useState([]);
-  const [alertText, setAlertText] = useState({
-    'severity': '',
-    'text': ''
-  })
+  const [toRead, setToRead] = useState<MyBook[]>([]);
+  const [current, setCurrent] = useState<MyBook[]>([]);
+  const [read, setRead] = useState<MyBook[]>([]);
+
   
   useEffect(() => {
     if (Object.keys(user).length === 0 && user.constructor === Object){
       const loggedInUser = localStorage.getItem('user');
       if (loggedInUser) {
         console.log(loggedInUser);
-        setUser({'username': loggedInUser})
+        setUser({...user, 'username': loggedInUser})
       }
     }}, [user]);
     
   useEffect(() => {getShelves(user.username)}, []);
   
-  const getShelves = async (username) => {
+  const getShelves = async (username:string) => {
     const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/show_shelves', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -47,7 +48,7 @@ const MyBooks = () => {
     setRead(data.read_shelf);
   }
 
-  const removeToRead = async (idx) => {
+  const removeToRead = async (idx: {idx: number}) => {
     console.log(idx.idx);
     const title = toRead[idx.idx].title;
     console.log(title);
@@ -62,7 +63,7 @@ const MyBooks = () => {
     getShelves(user.username);
   }
 
-  const makeCurrent = async (t) => {
+  const makeCurrent = async (t:string) => {
     const title = t;
     console.log(title);
     const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/make_current', {
@@ -76,7 +77,7 @@ const MyBooks = () => {
     getShelves(user.username);
   }
 
-  const makeRead = async (t) => {
+  const makeRead = async (t:string) => {
     const title = t;
     console.log(title);
     const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/make_read', {
@@ -90,7 +91,7 @@ const MyBooks = () => {
     getShelves(user.username);
   }
 
-  const makeToRead = async (t) => {
+  const makeToRead = async (t:string) => {
     const title = t;
     console.log(title);
     const response = await fetch('https://react-flask-bookies-app.onrender.com/books_api/make_to_read', {
@@ -104,7 +105,7 @@ const MyBooks = () => {
     getShelves(user.username);
   }
 
-  const removeCurrent = async (idx) => {
+  const removeCurrent = async (idx: {idx: number}) => {
     console.log(idx.idx);
     const title = current[idx.idx].title;
     console.log(title);
@@ -119,7 +120,7 @@ const MyBooks = () => {
     getShelves(user.username);
   }
 
-  const removeRead = async (idx) => {
+  const removeRead = async (idx: {idx: number}) => {
     console.log(idx.idx);
     const title = read[idx.idx].title;
     console.log(title);
@@ -142,7 +143,7 @@ const MyBooks = () => {
           <div className="shelf-backdrop">
             <p className="shelf-title">To Read</p>
             <div className="shelf">
-                {toRead && toRead.map((book, idx) => 
+                {toRead && toRead.map((book, idx:number) => 
                 <>
                   <div key={idx} className="bookcard">
                     <div className="shelf-covers">
@@ -163,7 +164,7 @@ const MyBooks = () => {
           <div className="shelf-backdrop">
             <p className="shelf-title">Current Reading</p>
             <div className="shelf">
-                {current && current.map((book, idx) => 
+                {current && current.map((book, idx:number) => 
                 <>
                   <div key={idx} className="bookcard">
                     <div className="shelf-covers">
@@ -184,7 +185,7 @@ const MyBooks = () => {
           <div className="shelf-backdrop">
             <p className="shelf-title">Past Reads</p>
             <div className="shelf">
-                {read && read.map((book, idx) => 
+                {read && read.map((book, idx:number) => 
                 <>
                   <div key={idx} className="bookcard">
                     <div className="shelf-covers">

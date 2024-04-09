@@ -6,12 +6,17 @@ import './Home.css'
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext.tsx';
 
+interface Chat {
+  role: "user" | "assistant" | undefined;
+  content: string;
+}
+
 const Home = () => {
     
     const {user, setUser} = useContext(UserContext);
     const [chatopen, setChatopen] = useState(false);
-    const [newInput, setNewinput] = useState([]);
-    const [chatrecord, setChatrecord] = useState([]);
+    const [newInput, setNewinput] = useState<string[]>([]);
+    const [chatrecord, setChatrecord] = useState<Chat[]>([]);
     const [typing, setTyping] = useState('');
 
     useEffect(() => {
@@ -42,7 +47,7 @@ const Home = () => {
     }, [newInput]);
 
 
-    const postInput = async (m) => {
+    const postInput = async (m:string) => {
       setChatrecord((chatrecord) => [...chatrecord, {
         "role": "user",
         "content": m
@@ -50,7 +55,7 @@ const Home = () => {
       setNewinput([...newInput, m])
     }
 
-    const postReply = (r) => {
+    const postReply = (r:string) => {
         setChatrecord([...chatrecord,{
           "role": "assistant",
           "content": r
