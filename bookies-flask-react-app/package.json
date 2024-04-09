@@ -15,7 +15,6 @@
     "@mui/icons-material": "^5.15.13",
     "@mui/material": "^5.15.12",
     "bootstrap": "^5.3.3",
-    "firebase": "^10.8.1",
     "mdb-react-ui-kit": "^7.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
@@ -33,6 +32,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "typescript": "^5.2.2",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vite-plugin-chunk-split": "^0.5.0"
   }
 }
