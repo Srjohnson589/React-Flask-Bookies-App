@@ -42,7 +42,7 @@ const Friends = () => {
     }
 
     const follow = async (tofollow:string) => {
-        const response = await fetch("http://127.0.0.1:5000/auth_api/follow", {
+        const response = await fetch("https://react-flask-bookies-app.onrender.com/auth_api/follow", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -56,7 +56,7 @@ const Friends = () => {
     }
 
     const unfollow = async (u:string) => {
-        const response = await fetch(`http://127.0.0.1:5000/auth_api/unfollow`, {
+        const response = await fetch(`https://react-flask-bookies-app.onrender.com/auth_api/unfollow`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
