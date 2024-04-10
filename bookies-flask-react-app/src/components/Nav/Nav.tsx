@@ -1,6 +1,7 @@
 import './Nav.css'
 import { useContext } from 'react';
 import Stack from '@mui/material/Stack';
+import Logo from '/src/assets/Bookieslogo3.png';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
@@ -18,7 +19,7 @@ const Nav = () => {
         
         <div className="myhomediv">
             <Link to={"/"}>
-                <img className="bookies-logo" src={require("/src/assets/Bookieslogo3.png")} alt="Bookies logo" />
+                <img className="bookies-logo" src={Logo} alt="Bookies logo" />
             </Link>
             <div className="signupbuttons">
                 <Stack direction="row" spacing={2}>
