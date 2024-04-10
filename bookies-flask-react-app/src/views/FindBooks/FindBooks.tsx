@@ -32,6 +32,7 @@ const FindBooks = () => {
     const [searchBook, setSearchBook] = useState('');
     const [returnResults, setReturnResults] = useState<NewBook[]>([]);
     const {user, setUser} = useContext(UserContext);
+    const [showAlert, setShowAlert] = useState(false);
     const [alertText, setAlertText] = useState<IAlert>({
       severity: undefined,
       text: ''
@@ -46,10 +47,7 @@ const FindBooks = () => {
       }, []);
 
   const searchResults = async (searchStr: string) => {
-    setAlertText({
-      severity: undefined,
-      text: ''
-    })
+    setShowAlert(false);
     const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}`);
     if (response.ok) {
         const data = await response.json();
@@ -105,11 +103,13 @@ const FindBooks = () => {
     })
     const data = await response.json()
     if (data.status === 'ok'){
+      setShowAlert(true);
       setAlertText({
         'severity': 'success',
         'text': 'Book was added to your "To Read" Shelf.'
       })
     } else {
+        setShowAlert(true);
         setAlertText({
           'severity': 'error',
           'text': 'Something went wrong and book was not saved'
@@ -126,11 +126,13 @@ const FindBooks = () => {
     const data = await response.json()
     console.log(data)
     if (data.status === 'ok'){
+      setShowAlert(true);
       setAlertText({
         'severity': 'success',
         'text': 'Book was added to your "Current" Shelf.'
       })
     } else {
+        setShowAlert(true);
         setAlertText({
           'severity': 'error',
           'text': 'Something went wrong and book was not saved'
@@ -147,11 +149,13 @@ const FindBooks = () => {
     const data = await response.json()
     console.log(data)
     if (data.status === 'ok'){
+      setShowAlert(true);
       setAlertText({
         'severity': 'success',
         'text': 'Book was added to your "Read" Shelf.'
       })
     } else {
+        setShowAlert(true);
         setAlertText({
           'severity': 'error',
           'text': 'Something went wrong and book was not saved'
@@ -162,7 +166,7 @@ const FindBooks = () => {
   return (
     <>
         <Nav/>
-        {alertText && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
+        {showAlert && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
         </Alert>}
         <div className="book-searchbar">
             <input 

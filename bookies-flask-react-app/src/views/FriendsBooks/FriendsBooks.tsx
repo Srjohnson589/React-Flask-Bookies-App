@@ -29,6 +29,7 @@ const FriendsBooks = () => {
   const [toRead, setToRead] = useState<MyBook[]>([]);
   const [current, setCurrent] = useState<MyBook[]>([]);
   const [read, setRead] = useState<MyBook[]>([]);
+  const [showAlert, setShowAlert] = useState(false);
   const [alertText, setAlertText] = useState<IAlert>({
     severity: undefined,
     text: ''
@@ -70,11 +71,13 @@ const FriendsBooks = () => {
     const data = await response.json();
     console.log(data);
     if (data.status === 'ok'){
+      setShowAlert(true);
       setAlertText({
         'severity': 'success',
         'text': 'Book was added to your Current shelf.'
       })
   } else {
+      setShowAlert(true);
       setAlertText({
         'severity': 'error',
         'text': data.message
@@ -93,11 +96,13 @@ const FriendsBooks = () => {
     const data = await response.json();
     console.log(data);
     if (data.status === 'ok'){
+      setShowAlert(true);
       setAlertText({
         'severity': 'success',
         'text': 'Book was added to your Read shelf.'
       })
     } else {
+      setShowAlert(true);
       setAlertText({
         'severity': 'error',
         'text': data.message
@@ -116,11 +121,13 @@ const FriendsBooks = () => {
     const data = await response.json();
     console.log(data);
     if (data.status === 'ok'){
+      setShowAlert(true);
       setAlertText({
         'severity': 'success',
         'text': 'Book was added to your To Read shelf.'
       })
     } else {
+      setShowAlert(true);
       setAlertText({
         'severity': 'error',
         'text': data.message
@@ -130,7 +137,7 @@ const FriendsBooks = () => {
   return (
     <>
         <Nav/>
-        {alertText && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
+        {showAlert && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
         </Alert>}
         <h1 className="shelf-h">{friend}'s Bookshelves</h1>
         <div className="shelf-backdrop">

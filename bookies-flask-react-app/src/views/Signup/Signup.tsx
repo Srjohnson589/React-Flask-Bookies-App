@@ -22,7 +22,7 @@ const Signup = () => {
     username: '',
     password: ''
   })
-
+  const [showAlert, setShowAlert] = useState(false);
   const [alertText, setAlertText] = useState<IAlert>({
     severity: undefined,
     text: ''
@@ -36,11 +36,13 @@ const Signup = () => {
     })
     const data = await response.json()
     if (data.status === 'ok'){
+        setShowAlert(true);
         setAlertText({
           'severity': 'success',
           'text': 'New account was created.'
         })
     } else {
+        setShowAlert(true);
         setAlertText({
           'severity': 'error',
           'text': 'That username already exists.'
@@ -52,6 +54,7 @@ const Signup = () => {
     event.preventDefault();
     console.log(newuser);
     if ((newuser['username'].trim()).length === 0){
+      setShowAlert(true);
       setAlertText({
         'severity': 'error',
         'text': 'Please enter a username'
@@ -64,7 +67,7 @@ const Signup = () => {
   return (
     <>
     <Nav/>
-    {alertText && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
+    {showAlert && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
     </Alert>}
     <Form className="signupform" onSubmit={handleSignup}>
       <h2>Sign Up</h2>

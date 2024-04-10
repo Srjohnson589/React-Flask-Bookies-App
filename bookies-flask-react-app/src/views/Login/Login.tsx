@@ -25,7 +25,7 @@ const Login = () => {
     username: '',
     password: ''
   })
-
+  const [showAlert, setShowAlert] = useState(false);
   const [alertText, setAlertText] = useState<IAlert>({
     severity: undefined,
     text: ''
@@ -47,6 +47,7 @@ const Login = () => {
       console.log(localStorage.getItem('user'));
       navigate('/');
     } else {
+      setShowAlert(true);
       setAlertText({
         'severity': 'error',
         'text': 'Username or password are incorrect'
@@ -61,7 +62,7 @@ const Login = () => {
   return (
     <>
     <Nav/>
-    {alertText && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
+    {showAlert && <Alert id={alertText.severity} sx={{ severity: `${alertText.severity}` }}>{alertText.text}
     </Alert>}
     <Form className="loginform" onSubmit={handleLogin}>
       <h2>Login</h2>
