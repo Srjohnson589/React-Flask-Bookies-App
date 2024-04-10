@@ -11,6 +11,11 @@ interface INewuser {
   password: string
 }
 
+interface IAlert {
+  severity: 'error' | 'info' | 'success' | 'warning' | undefined;
+  text: string;
+}
+
 const Signup = () => {
 
   const [newuser, setNewuser] = useState<INewuser>({
@@ -18,9 +23,9 @@ const Signup = () => {
     password: ''
   })
 
-  const [alertText, setAlertText] = useState({
-    'severity': '',
-    'text': ''
+  const [alertText, setAlertText] = useState<IAlert>({
+    severity: undefined,
+    text: ''
   })
 
   const createUser = async () => {

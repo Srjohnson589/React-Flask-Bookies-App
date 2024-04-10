@@ -12,6 +12,11 @@ interface ILoginuser {
   password: string
 }
 
+interface IAlert {
+  severity: 'error' | 'info' | 'success' | 'warning' | undefined;
+  text: string;
+}
+
 const Login = () => {
 
   const {user, setUser} = useContext(UserContext)
@@ -21,9 +26,9 @@ const Login = () => {
     password: ''
   })
 
-  const [alertText, setAlertText] = useState({
-    'severity': '',
-    'text': ''
+  const [alertText, setAlertText] = useState<IAlert>({
+    severity: undefined,
+    text: ''
   })
 
   const navigate = useNavigate()

@@ -18,7 +18,7 @@ const Nav = () => {
         
         <div className="myhomediv">
             <Link to={"/"}>
-                <img className="bookies-logo" src="/src/assets/images/Bookieslogo3.png" alt="" />
+                <img className="bookies-logo" src="https://bookies-4rys.onrender.com/public/Bookieslogo3.png" alt="" />
             </Link>
             <div className="signupbuttons">
                 <Stack direction="row" spacing={2}>

@@ -16,6 +16,11 @@ interface MyBook {
   thumbnail: string;
 }
 
+interface IAlert {
+  severity: 'error' | 'info' | 'success' | 'warning' | undefined;
+  text: string;
+}
+
 const FriendsBooks = () => {
 
   const {user, setUser} = useContext(UserContext);
@@ -24,9 +29,9 @@ const FriendsBooks = () => {
   const [toRead, setToRead] = useState<MyBook[]>([]);
   const [current, setCurrent] = useState<MyBook[]>([]);
   const [read, setRead] = useState<MyBook[]>([]);
-  const [alertText, setAlertText] = useState({
-    'severity': '',
-    'text': ''
+  const [alertText, setAlertText] = useState<IAlert>({
+    severity: undefined,
+    text: ''
   })
   
   useEffect(() => {

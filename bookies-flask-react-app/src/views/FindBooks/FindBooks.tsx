@@ -22,8 +22,8 @@ interface NewBook {
   description: string;
 }
 
-interface Alert {
-  severity: 'error' | 'info' | 'success' | 'warning';
+interface IAlert {
+  severity: 'error' | 'info' | 'success' | 'warning' | undefined;
   text: string;
 }
 
@@ -32,10 +32,10 @@ const FindBooks = () => {
     const [searchBook, setSearchBook] = useState('');
     const [returnResults, setReturnResults] = useState<NewBook[]>([]);
     const {user, setUser} = useContext(UserContext);
-    const [alertText, setAlertText] = useState({
-      'severity': 'success',
-      'text': ''
-    })
+    const [alertText, setAlertText] = useState<IAlert>({
+      severity: undefined,
+      text: ''
+    });
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem('user');
@@ -47,8 +47,8 @@ const FindBooks = () => {
 
   const searchResults = async (searchStr: string) => {
     setAlertText({
-      'severity': '',
-      'text': ''
+      severity: undefined,
+      text: ''
     })
     const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchStr}`);
     if (response.ok) {

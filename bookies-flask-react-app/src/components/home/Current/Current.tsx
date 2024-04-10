@@ -27,8 +27,6 @@ const Current = () => {
           body: JSON.stringify({'username': username})
         })
         const data = await response.json();
-        console.log("********************************* line 31")
-        console.log(data)
         const currentShelf: B[] = data.current_shelf;
         for (let item of currentShelf) {
           setMyCurrent([...myCurrent, item]);
